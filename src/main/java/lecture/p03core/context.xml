@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+<!-- spring에서 객체를 만들고 dependency(field)를 주입(set메서드로 필드를 세팅)하라는 설명서 -->
+<!-- spring bean : spring이 만들고 관리하는 객체 -->
+
+<!-- 스프링이 만들어야 하는 객체(bean) -->
+<bean class="lecture.p03core.Servlet1"></bean>
+<bean class="lecture.p03core.ProductDao"></bean>
+
+</beans>
