@@ -26,7 +26,7 @@ public class Controller09 {
 		System.out.println(request.getParameter("a"));
 	}
 	
-	// 리퀘스트 파라미터를 메서드 파라미터에 바인딩할 때 쓰는 어노테이션
+	// @RequestParam : '리퀘스트 파라미터'를 '메서드 파라미터'에 바인딩할 때 쓰는 어노테이션
 	@GetMapping(path = "sub03")
 	public void m3(@RequestParam(name = "n") String s) {
 //	public void m3(@RequestParam(value = "n") String s) { //name과 같은일을 하는 value

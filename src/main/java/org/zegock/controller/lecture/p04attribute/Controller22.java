@@ -86,15 +86,17 @@ public class Controller22 {
 
 		return "redirect:/ex22/sub10";
 	}
-
+//참고로 모델어트리뷰트는.. 인스턴스화 가능한 객체만 다룸?
 	@RequestMapping("sub10") // 세션에 전달 후 바로 삭제
 	public void m10(@ModelAttribute JavaBean03 javabean03,HttpServletResponse res) throws IOException {
+//	public void m10(@ModelAttribute JavaBean03 javabean03) {
+			
+		
 		System.out.println(javabean03);
-		
-	//	HttpServletResponse response= new HttpResponse();
+	//	HttpServletResponse response= new HttpResponse();//이거 인터페이스라서 인스턴스생성 불가.
 		PrintWriter out = res.getWriter(); 
-		
-	 out.write("<h3>"+javabean03.toString()+"</h3>");
+	 out.write("<h3>"+javabean03.toString()+"</h3>");  //그냥 한 번 써본 out객체..
+       //참고로 이렇게.. 프린트롸이터로 출력하면 jsp페이지보다 이게 우선인가봐. 이게 출력됨.
 	}
 
 }

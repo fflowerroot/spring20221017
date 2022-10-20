@@ -26,7 +26,9 @@ public class Controller19 {
 	@RequestMapping("sub7")
 	public void m4(HttpServletResponse res, HttpServletRequest req) throws IOException {
 		String loc= req.getContextPath()+"/ex19/sub8";
+//		System.out.println(req.getContextPath());
 		res.sendRedirect(loc);
+		System.out.println("222"+req.getContextPath()); // 여기 위치해도 실행됨. 그니까 리다이렉트가 함수 종료는 아니라는거지.
 	}
 
 	@RequestMapping("sub9")

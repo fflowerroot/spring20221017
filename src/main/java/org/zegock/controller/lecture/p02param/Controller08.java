@@ -22,7 +22,7 @@ public class Controller08 {
 		System.out.println("m1");
 	}
 	
-	@GetMapping("sub02") //디스패처서블릿이 알맞은 객체를 넣어준다는?
+	@GetMapping("sub02") //디스패처서블릿이 알맞은 객체를 넣어준다는? // 알맞은?
 	public void m2(HttpServletRequest request) {
 		System.out.println(request.toString());
 		System.out.println(request);

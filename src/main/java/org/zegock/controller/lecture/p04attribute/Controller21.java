@@ -44,5 +44,6 @@ public class Controller21 {
 
 	}
 	// 쿼리스트링으로 넘기면 문자로밖에 할 수없음 >>> 세션으로 넘기면 문자 외 가능.
-
+//ptional int parameter 'age' is present but cannot be translated into a null value due to being declared as a primitive type. 
+	//Consider declaring it as object wrapper for the corresponding primitive type.
 }
