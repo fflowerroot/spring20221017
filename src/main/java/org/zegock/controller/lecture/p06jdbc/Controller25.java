@@ -97,6 +97,7 @@ public class Controller25 {
 					System.out.println(col1);
 					System.out.println(col2);
 // 1,2,3형
+					
 // -- 어떤 테이블이 다른 테으블의 프라이머리키를(?) 컬럼으로 가지고 있을 때 그 키를 forien key(여러개 가능)라고 함. 두 테이블의 연결성.  
 //			        -- 정규화 때문에 테이블이 나눠지게되는데, 포린키를 이용해서 여러 테이블을 연결해줌.
 //			         --   ? 종속된 컬럼이 없도록 하라고? 
