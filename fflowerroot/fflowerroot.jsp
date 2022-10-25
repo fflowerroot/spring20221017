@@ -25,3 +25,39 @@ mvc
  
 * request.getRequestDispatcher("/WEB-INf/view/notice/list.jsp").forward(request,response);    
      
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
