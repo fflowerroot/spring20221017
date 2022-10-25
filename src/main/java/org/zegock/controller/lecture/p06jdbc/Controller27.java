@@ -34,7 +34,7 @@ public class Controller27 {
 				Statement st = con.createStatement();
 				st.execute(sql1);
 
-				int b = 3 / 0;
+				// int b = 3 / 0;
 
 				Statement st2 = con.createStatement();
 				st.execute(sql2);
@@ -103,25 +103,24 @@ public class Controller27 {
 				PreparedStatement pstmt1 = con.prepareStatement(sql1);
 				pstmt1.setInt(1, salary); // 요청폼으로받은
 				pstmt1.setString(2, lname);// 요청폼으로받은
-				pstmt1.executeUpdate();
-				System.out.println("1..");
+
+				System.out.println(pstmt1.executeUpdate());
+				
+				PreparedStatement pstmt2 = con.prepareStatement(sql2);
+
+				pstmt2.setInt(1, salary); // 요청폼으로받은
+				pstmt2.setString(2, lname);// 요청폼으로받은
+				pstmt2.executeUpdate();
+				System.out.println("2..");
+
 				con.commit();
 
 			} catch (Exception e) {
 				con.rollback();
 			}
-			System.out.println("이걸실행하나요?");
-			/*
-			 * try {
-			 * 
-			 * PreparedStatement pstmt2 = con.prepareStatement(sql2);
-			 * System.out.println("aaa"); pstmt2.setInt(1, salary); // 요청폼으로받은
-			 * pstmt2.setString(2, lname);// 요청폼으로받은 pstmt2.executeUpdate();
-			 * System.out.println("2..");
-			 * 
-			 * con.commit(); } catch (Exception e) { con.rollback(); }
-			 */
 		}
+		System.out.println("이걸실행하나요?");
+
 	}
 
 	@GetMapping("sub03")
