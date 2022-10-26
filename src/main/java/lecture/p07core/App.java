@@ -1,12 +1,13 @@
 package lecture.p07core;
 
 import org.springframework.context.ApplicationContext;
+
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
 public class App {
 	public static void main(String[] args) {
-		String loc = "/lecture/p07core/context.xml";
-		ApplicationContext context = new ClassPathXmlApplicationContext(loc);
+		String loc = "/lecture/p07core/context.xml"; //?
+		ApplicationContext context = new ClassPathXmlApplicationContext(loc); //?
 		
 		Service s = context.getBean(Service.class);
 		Dao d = context.getBean(Dao.class);
@@ -15,6 +16,8 @@ public class App {
 		System.out.println(d);
 		
 		System.out.println("프로그램 실행 계속됨");
+		
+		//계속 이 core패키지들에서 뭐한건지 모르겠는데? 뭐 한게 없음.
 	}
 }
 
