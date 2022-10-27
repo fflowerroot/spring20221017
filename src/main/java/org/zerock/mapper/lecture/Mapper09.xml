@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="org.zerock.mapper.lecture.Mapper09">
+
+<select  id="getCustomerNameById" resultType="string">
+ select CustomerName from Customers where CustomerID= #{id}
+</select>
+
+<select id="getEmployeeFirstNameById" resultType="String">
+select firstname from Employees where employeeid=#{dfdfwdf}
+</select>
+
+	<select id="getCustomerNameByCityAndCountry" resultType="string">
+SELECT 
+	CustomerName
+FROM
+	Customers
+WHERE
+	City = #{city}
+	AND Country = #{country}
+	</select>
+
+<!-- 	<select id="getCustomerNameByCityAndCountry2" resultType="string"> -->
+<!-- SELECT  -->
+<!-- 	CustomerName -->
+<!-- FROM -->
+<!-- 	Customers -->
+<!-- WHERE -->
+<!-- 	City = #{city} -->
+<!-- 	AND Country = #{country} -->
+<!-- 	</select> -->
+
+<select id="getSupplierNameByCityAndCountry" resultType="string">
+SELECT 
+	SupplierName
+FROM
+	Suppliers
+WHERE
+	City = #{매퍼java파일의파라미터이름과맞추면됨}
+	AND Country = #{country111}
+	</select>
+	
+	<select id="getContactName" resultType="string">
+SELECT
+	ContactName
+FROM
+	Customers
+<!-- WHERE -->
+<!-- 	CustomerName = #{bean1.name} -->
+<!--  AND Country = #{bean1.country} -->
+WHERE
+	CustomerName = #{name}
+ AND Country = #{country}
+	</select>
+	
+		<select id="getSupplierContactName" resultType="string">
+<!-- //파라미터가 1개이고 빈일 때는 xml파일에서 프로퍼티명으로 바로 써준다. -->
+SELECT
+	ContactName
+FROM
+	Suppliers
+WHERE
+	SupplierName = #{name}
+ AND Country = #{country}
+	</select>
+<!-- 	반안의 프로퍼티가 '?'(파라미터)에 들어가도록 -->
+	
+	<select  id="getProductName" resultType="string">
+SELECT 
+	ProductName
+FROM 
+	Products
+WHERE
+	CategoryId = #{b16.categoryId}
+    AND Price >= #{b17.price}
+	</select>
+	
+
+	
+</mapper>
+
+
+
+
+
+
+
+
+

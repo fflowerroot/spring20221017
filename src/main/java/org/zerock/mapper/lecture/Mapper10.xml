@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="org.zerock.mapper.lecture.Mapper10">
+
+	<delete id="removeCustomer">
+		DELETE from Customers where CustomerID=91;
+
+	</delete>
+	<!-- - Attribute "resultType" must be declared for element type delete".? -->
+	<!-- delete는 자동으로 반환타입이 int? -->
+	<delete id="removeEmployee">
+		DELETE FROM Employees
+		WHERE EmployeeID = 1
+	</delete>
+
+	<delete id="removeCustomerById">
+		DELETE from Customers where CustomerID=#{id};
+
+	</delete>
+
+	<insert id="addCustomer">
+
+		insert into Customers (CustomerName, ContactName,
+		Address, City, PostalCode,
+		Country)
+		values('s','s','s','s','s','s')
+	</insert>
+
+
+	<insert id="addSupplier">
+
+		insert into Suppliers (SupplierName)
+		values('SupplierName')
+	</insert>
+
+	<insert id="addSupplier2">
+
+		insert into Suppliers (SupplierID)
+		values(44)
+	</insert>
+
+	<!-- <insert id = "addSupplier"> -->
+
+	<!-- insert into Suppliers (SupplierName) -->
+	<!-- values('SupplierName') -->
+	<!-- </insert> -->
+
+	<insert id="insertCustomer">
+
+		insert into Customers (CustomerName, ContactName,
+		Address, City, PostalCode,
+		Country)
+		values(#{name},#{contactName},#{address},#{city},#{postalCode},#{country})
+	</insert>
+
+	<!-- xml에서 인서트쿼리 반환값 인트로 고정? /xml파일에서 함수내용을 작성하는 꼴? -->
+	<insert id="insertCustomers" resultMap="supplierMap">
+		<!-- Attribute "resultMap" must be declared for element type "insert". -->
+
+
+		insert into Customers (CustomerName, ContactName, Address, City,
+		PostalCode, Country)
+		values(#{name},#{contactName},#{address},#{city},#{postalCode},#{country})
+
+		insert into Customers (CustomerName, ContactName, Address, City,
+		PostalCode, Country)
+		values(#{name},#{contactName},#{address},#{city},#{postalCode},#{country})
+	</insert>
+
+	<resultMap type="org.zerock.domain.lecture.JavaBean15"
+		id="supplierMap">
+		
+		<id column="SupplierID" property="id"></id>
+		<result column="SupplierName" property="name"></result>
+		<collection property="product"
+			ofType="org.zerock.domain.lecture.JavaBean14">
+			<id column="productId" property="id"></id>
+			<result column="ProductName" property="name"></result>
+			<result column="price" property="price"></result>
+		</collection>
+	</resultMap>
+</mapper>
+
+
+
+
+
+
+
+
+

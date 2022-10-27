@@ -31,6 +31,7 @@ SELECT
 FROM Products p JOIN Suppliers s ON p.SupplierID = s.SupplierID
 WHERE s.SupplierID = 1
 	 */
+	
 	@RequestMapping("sub02")
 	public void method2() {
 		JavaBean12 supplier = mapper.getSupplier();
