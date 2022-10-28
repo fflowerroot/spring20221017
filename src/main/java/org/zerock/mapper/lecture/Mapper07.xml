@@ -44,7 +44,8 @@ where c.CategoryID=7;
 		<result column="price" property="price"></result>
 	</collection>
 </resultMap>
-
+<!-- 기본타입은 리퀘스트파람. 나머지는 모델어트리뷰트 -->
+<!-- 모델어트리뷰트 이름이 리퀘스트파람이름과 같으면 모델어트리뷰트에 자동 채워짐.  -->
 </mapper>
 
 

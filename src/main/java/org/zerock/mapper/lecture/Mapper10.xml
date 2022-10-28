@@ -56,8 +56,8 @@
 		values(#{name},#{contactName},#{address},#{city},#{postalCode},#{country})
 	</insert>
 
-	<!-- xml에서 인서트쿼리 반환값 인트로 고정? /xml파일에서 함수내용을 작성하는 꼴? -->
-	<insert id="insertCustomers" resultMap="supplierMap">
+<!-- 	xml에서 인서트쿼리 반환값 인트로 고정? /xml파일에서 함수내용을 작성하는 꼴? -->
+	<insert id="insertCustomers">
 		<!-- Attribute "resultMap" must be declared for element type "insert". -->
 
 
@@ -82,6 +82,22 @@
 			<result column="price" property="price"></result>
 		</collection>
 	</resultMap>
+
+	<insert id="insertCustomerAndGetKey" useGeneratedKeys="true" keyProperty="id">
+
+		insert into Customers (CustomerName, ContactName,
+		Address, City, PostalCode,
+		Country)
+		values(#{name},#{contactName},#{address},#{city},#{postalCode},#{country})
+	</insert>
+	
+	<insert id="insertSupplierAndGetKey" useGeneratedKeys="true" keyProperty="id">
+
+		INSERT INTO Suppliers
+	(SupplierName, ContactName, Address, City, PostalCode, Country, Phone)
+	VALUES 
+	('Park', 'JISUNG', 'SEOUL', 'SEOUL', '3333333', 'KOREA', '01099999999')
+	</insert>
 </mapper>
 
 

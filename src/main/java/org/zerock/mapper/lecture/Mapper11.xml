@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="org.zerock.mapper.lecture.Mapper11">
+	<select id="getCustomerById" resultType="org.zerock.domain.lecture.JavaBean18">
+SELECT
+	CustomerId id,
+	CustomerName name,
+	ContactName,
+	Address,
+	City,
+	PostalCode, 
+	Country
+FROM 
+	Customers
+WHERE
+	CustomerId = #{id}
+	</select>
+
+	<update id="updateCustomer">
+UPDATE Customers
+SET 
+	CustomerName = #{name},
+    ContactName = #{contactName},
+    Address = #{address},
+    City = #{city},
+    PostalCode = #{postalCode},
+    Country = #{country}
+WHERE
+	CustomerId = #{id}	
+	</update>
+	
+	
+	
+	
+<!-- 	select * 로는 가져올 수 없는건가? -->
+<!--    > 프로퍼티명(객체 빈의 필드 프로퍼티)과 같아야해서. -->
+<!--    > SupplierName name 은 SupplierName컬럼을 name 필드에 넣음. -->
+<!--    > ContactName c 는 ContactName컬럼을 c필드에 넣음. -->
+		<select id="getSupplierById" resultType="org.zerock.domain.lecture.JavaBean19">
+SELECT
+	SupplierID id,
+	SupplierName name,
+	ContactName,
+	Address,
+	City,
+	PostalCode, 
+	Country
+FROM 
+	Suppliers
+WHERE
+	SupplierID = #{id}
+	</select>
+
+	<update id="updateSupplier">
+UPDATE Suppliers
+SET 
+	SupplierName = #{name},
+    ContactName = #{contactName},
+    Address = #{address},
+    City = #{city},
+    PostalCode = #{postalCode},
+    Country = #{country}
+WHERE
+	SupplierID = #{id}	
+	</update>
+</mapper>
+

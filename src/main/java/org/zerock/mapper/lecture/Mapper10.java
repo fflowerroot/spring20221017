@@ -1,14 +1,10 @@
 package org.zerock.mapper.lecture;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import org.zerock.domain.lecture.JavaBean04;
-import org.zerock.domain.lecture.JavaBean13;
-import org.zerock.domain.lecture.JavaBean15;
-import org.zerock.domain.lecture.JavaBean16;
-import org.zerock.domain.lecture.JavaBean17;
-import org.zerock.domain.lecture.Javabean18;
+import org.zerock.domain.lecture.JavaBean18;
+import org.zerock.domain.lecture.JavaBean19;
+
 
 public interface Mapper10 {
 
@@ -24,7 +20,13 @@ public interface Mapper10 {
 
 	int addSupplier2();
 
-	int insertCustomer(Javabean18 customer);
+	int insertCustomer(JavaBean18 customer);
 
-	int insertCustomers(ArrayList<Javabean18> customers);
+	int insertCustomers(ArrayList<JavaBean18> customers); // 어떻게함?
+
+	int insertCustomerAndGetKey(JavaBean18 customer);
+
+	int insertSupplierAndGetKey(JavaBean19 supplier);
 }
+
+// cf) 리디렉트어트리뷰트는 세션이 끝나면 사라짐
