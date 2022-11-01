@@ -28,6 +28,7 @@ public class BoardController {
 	//java.lang.NullPointerException: Cannot invoke "org.zerock.mapper.board.BoardMapper.insert(org.zerock.domain.board.BoardDto)" because "this.mapper" is null
 
 
+	
 	//------------------c----------------
 	
 	@GetMapping("register")
@@ -58,6 +59,9 @@ public class BoardController {
 	}
 	
 	
+	
+	
+	
 	//-------------------r-----------------
 	@GetMapping("list")    //여기서 포워드로 넘겨주는거라서 여기까지 객체?가 와야함.
 	public void list(
@@ -70,14 +74,18 @@ public class BoardController {
 							// 모델도 스프링이 넣어주고? 모델에는 뭐가 담겨있어 ? ?
 					
 		// request param
+		
 		// business logic
-		List<BoardDto> list = service.listBoard(page,type,keyword, pageInfo);
+		List<BoardDto> list = service.listBoard(page, type, keyword, pageInfo);
 		
 		// add attribute
-		model.addAttribute("boardList", list); //모델에 꼭 넣어줘야함?
+		model.addAttribute("boardList", list); //모델에 꼭 넣어줘야함? //board로 넘겨줘도 됨 ?
 		// forward
 	}
 	// 존재하지 않으면 객체 생성.리퀘스트파라미터 네임과 일치하는 필드네임을? 쓴다. ->데이터바인딩.
+	
+	
+	
 	
 
 	@GetMapping("get") 
@@ -93,6 +101,13 @@ public class BoardController {
 		// forward
 		
 	}
+	
+	
+	
+	
+	
+	
+	
 	
 	//-----------------u---------------------
 	@GetMapping("modify")
@@ -114,6 +129,13 @@ public class BoardController {
 		
 		return "redirect:/board/list";
 	}
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	//----------------d-------------------

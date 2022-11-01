@@ -15,8 +15,9 @@
 	<my:navBar active="list"></my:navBar>
 	
 	<div class="container-md">
-		<div class="row">
-			<div class="col">
+	
+<!-- 		<div class="row"> -->
+<!-- 			<div class="col"> -->
 			
 
 				<c:if test="${not empty message }">
@@ -53,10 +54,16 @@
 						</c:forEach> 
 					</tbody>
 				</table>
-			</div>
-		</div>
-		<div class="row">
-			<div class="col">
+<!-- 			</div> -->
+<!-- 		 </div> -->
+		
+		
+		
+		
+		
+		
+<!-- 		<div class="row"> -->
+<!-- 			<div class="col"> -->
 				<nav class="mt-3" aria-label="Page navigation example">
 				  <ul class="pagination justify-content-center">
 				  
@@ -129,9 +136,11 @@
 				  	</c:if>
 				  </ul>
 				</nav>
-			</div>
-		</div>
+<!-- 			</div> -->
+<!-- 		</div> -->
+		
 	</div>
+	
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-OERcA2EqjJCMA+/3y+gxIOqMEjwtxJY7qPCqsdltbNJuaOe923+mo//f6V8Qbsw3" crossorigin="anonymous"></script>
 </body>
 </html>

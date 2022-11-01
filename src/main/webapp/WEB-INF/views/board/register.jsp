@@ -11,15 +11,16 @@
 </head>
 <body>
 	<h1>게시물 작성</h1>  
+	
+	
 	<form action="" method="post">
-	제목 <input type="text" name="title"> <br>
-	
-	본문 <textarea name="content"></textarea> <br>
-	
-	작성자 <input type="text" name="writer"> <br>
-	
-	
-	<input type="submit" value="등록">
+
+
+		제목 <input type="text" name="title"> <br>
+		본문 <textarea name="content"></textarea> <br>
+		작성자 <input type="text" name="writer"> <br>
+		
+		<input type="submit" value="등록">
 	
 	
 	</form>
