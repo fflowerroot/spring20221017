@@ -57,10 +57,17 @@ public class BoardController {
 	
 	//-------------------r-----------------
 	@GetMapping("list")    //여기서 포워드로 넘겨주는거라서 여기까지 객체?가 와야함.
-	public void list(@RequestParam(name="page", defaultValue="1")int page, PageInfo pageInfo, Model model) {
+	public void list(
+			@RequestParam(name="page", defaultValue="1")int page,
+			@RequestParam(name="t", defaultValue="all") String type, 
+			@RequestParam(name="q", defaultValue="") String keyword, 
+			
+			PageInfo pageInfo, 
+			Model model) {
+					
 		// request param
 		// business logic
-		List<BoardDto> list = service.listBoard(page,pageInfo);
+		List<BoardDto> list = service.listBoard(page,type,keyword, pageInfo);
 		
 		// add attribute
 		model.addAttribute("boardList", list); //모델에 꼭 넣어줘야함?
@@ -123,6 +130,15 @@ public class BoardController {
 	
 	
 }
+
+//org.springframework.jdbc.BadSqlGrammarException: 
+//### Error querying database.  Cause: java.sql.SQLSyntaxErrorException: (conn=1678) You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 2
+//### The error may exist in org/zerock/mapper/board/BoardMapper.xml
+//### The error may involve defaultParameterMap
+//### The error occurred while setting parameters
+//### SQL: SELECT COUNT(*) FROM Board  WHERE
+//### Cause: java.sql.SQLSyntaxErrorException: (conn=1678) You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 2
+//; bad SQL grammar []; nested exception is java.sql.SQLSyntaxErrorException: (conn=1678) You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '' at line 2
 
 
 
