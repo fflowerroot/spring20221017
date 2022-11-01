@@ -7,12 +7,14 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.domain.board.BoardDto;
+import org.zerock.domain.board.PageInfo;
 import org.zerock.service.board.BoardSerivce;
 
 @Controller
@@ -54,16 +56,17 @@ public class BoardController {
 	
 	
 	//-------------------r-----------------
-	@GetMapping("list")
-	public void list(Model model) {
+	@GetMapping("list")    //여기서 포워드로 넘겨주는거라서 여기까지 객체?가 와야함.
+	public void list(@RequestParam(name="page", defaultValue="1")int page, PageInfo pageInfo, Model model) {
 		// request param
 		// business logic
-		List<BoardDto> list = service.listBoard();
+		List<BoardDto> list = service.listBoard(page,pageInfo);
 		
 		// add attribute
-		model.addAttribute("boardList", list);
+		model.addAttribute("boardList", list); //모델에 꼭 넣어줘야함?
 		// forward
 	}
+	// 존재하지 않으면 객체 생성.리퀘스트파라미터 네임과 일치하는 필드네임을? 쓴다. ->데이터바인딩.
 	
 
 	@GetMapping("get") 
