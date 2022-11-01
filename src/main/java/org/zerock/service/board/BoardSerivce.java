@@ -33,7 +33,7 @@ public class BoardSerivce {
 		int rightPageNumber=leftPageNumber+9;
 		rightPageNumber=Math.min(lastPage, rightPageNumber);
 		
-		pageInfo.setCurrentPageNumber(currentPageNumber);
+		pageInfo.setCurrentPageNumber(page);
 		pageInfo.setLastPageNumber(lastPage);
 		pageInfo.setLeftPageNumber(leftPageNumber);
 		pageInfo.setRightPageNumber(rightPageNumber);
