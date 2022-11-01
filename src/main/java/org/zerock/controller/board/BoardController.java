@@ -34,21 +34,24 @@ public class BoardController {
 	public void register() {
 		// 게시물 작성 view로 포워드
 		// /WEB-INF/views/board/register.jsp
-	} //어떻게 조건이  not null인데 아무입력 없이 등록이 되지 ?
+	} //아무 입력없이 등록하면 null이 아니라 빈문자열로 등록됨
 	
 	
-	@PostMapping("register")
+	@PostMapping("register") //register.jsp에서 action으로 넘어온./그러면 action은 리디렉트 ?>그런가봐 -> 그러니까 이 메서드의 파라미터로 RedirectAttributes를 받음.
 	public String register(BoardDto board, RedirectAttributes rttr) {
 		// request param 수집/가공
+		// jsp 폼으로 입력받은 title,content,writer 3개 어트리뷰트가 넘어옴( 보드에 담겨서 넘어와 ?? -> 보드에 어트리뷰트명이랑 일치하는 프로퍼티가 있어서? )
 		
 		// business logic
 		int cnt = service.register(board);//서비스에 의존하고 있으니 의존성 주입 받아야함.
+		// ? xml 쿼리에서 인서트 반환타입 안적어줬는데 인트로 반환됨. 왜 ? 
 		
 		if (cnt == 1) {
 			rttr.addFlashAttribute("message", "새 게시물이 등록되었습니다.");
 		} else {
 			rttr.addFlashAttribute("message", "새 게시물이 등록되지 않았습니다.");
 		}
+		// ?? 넘겨주는 것들이 모델과 리퀘스트파람과 보드와 리디렉트어트리뷰트..등이 있음 -> 결국 어트리뷰트들이 어디붙어서 넘어감?
 		
 		// /board/list로 redirect
 		return "redirect:/board/list";
@@ -60,10 +63,11 @@ public class BoardController {
 	public void list(
 			@RequestParam(name="page", defaultValue="1")int page,
 			@RequestParam(name="t", defaultValue="all") String type, 
-			@RequestParam(name="q", defaultValue="") String keyword, 
-			
+			@RequestParam(name="q", defaultValue="") String keyword, 		
 			PageInfo pageInfo, 
-			Model model) {
+			Model model) { // 리퀘스트파람은 처음엔 넘어올게 없어서 기본값 세팅해준거로 넘어가고,
+							// 페이지인포는 스프링이 넣어주고?
+							// 모델도 스프링이 넣어주고? 모델에는 뭐가 담겨있어 ? ?
 					
 		// request param
 		// business logic

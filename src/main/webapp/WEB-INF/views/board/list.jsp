@@ -42,7 +42,6 @@
 								<td>
 									<c:url value="/board/get" var="getLink">
 										<c:param name="id" value="${board.id }"></c:param>
-										
 									</c:url>
 									<a href="${getLink }">
 										${board.title }
