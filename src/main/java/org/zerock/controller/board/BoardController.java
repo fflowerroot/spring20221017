@@ -2,22 +2,23 @@ package org.zerock.controller.board;
 
 import java.util.List;
 
-
-
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.domain.board.BoardDto;
+import org.zerock.domain.board.JavaBean01;
 import org.zerock.domain.board.PageInfo;
+import org.zerock.domain.board.PageInfo2;
 import org.zerock.service.board.BoardSerivce;
 
 @Controller
+@Component
 @RequestMapping("board") // web inf의 view에서 찾으라고 언제 지정해줬어?
 public class BoardController {
 	
@@ -38,8 +39,8 @@ public class BoardController {
 	} //아무 입력없이 등록하면 null이 아니라 빈문자열로 등록됨
 	
 	
-	@PostMapping("register") //register.jsp에서 action으로 넘어온./그러면 action은 리디렉트 ?>그런가봐 -> 그러니까 이 메서드의 파라미터로 RedirectAttributes를 받음.
-	public String register(BoardDto board, RedirectAttributes rttr) {
+	@PostMapping("register") //register.jsp에서 action으로 넘어온./그러면 action은 리디렉트 ?
+	public String register(BoardDto board, RedirectAttributes rttr) { //RedirectAttributes는 redirect로 '넘겨줄' 어트리뷰트.
 		// request param 수집/가공
 		// jsp 폼으로 입력받은 title,content,writer 3개 어트리뷰트가 넘어옴( 보드에 담겨서 넘어와 ?? -> 보드에 어트리뷰트명이랑 일치하는 프로퍼티가 있어서? )
 		
@@ -69,14 +70,18 @@ public class BoardController {
 			@RequestParam(name="t", defaultValue="all") String type, 
 			@RequestParam(name="q", defaultValue="") String keyword, 		
 			PageInfo pageInfo, 
+			PageInfo2 pageInfo2, 
+			PageInfo2 pageInfo3, 
+			JavaBean01 j,
 			Model model) { // 리퀘스트파람은 처음엔 넘어올게 없어서 기본값 세팅해준거로 넘어가고,
-							// 페이지인포는 스프링이 넣어주고?
+							// 페이지인포는 스프링이 넣어주고? 
 							// 모델도 스프링이 넣어주고? 모델에는 뭐가 담겨있어 ? ?
-					
+							// (모델은 디스페처서블릿이 관리해줌)	
 		// request param
 		
 		// business logic
-		List<BoardDto> list = service.listBoard(page, type, keyword, pageInfo);
+		List<BoardDto> list = service.listBoard(page, type, keyword, pageInfo, pageInfo2); //서비스의 listBoard메서드를 실행해서 보드리스트를 가져옴
+		j.setAddress("aaaaaa1");
 		
 		// add attribute
 		model.addAttribute("boardList", list); //모델에 꼭 넣어줘야함? //board로 넘겨줘도 됨 ?
@@ -90,7 +95,7 @@ public class BoardController {
 
 	@GetMapping("get") 
 	public void get(
-			// @RequestParam 생략 가능
+			// @RequestParam 생략 가능 -> 기본타입(String포함?)이면 리퀘스트파람으로 간주된대
 			@RequestParam(name = "id") int id,
 			Model model) {
 		// req param

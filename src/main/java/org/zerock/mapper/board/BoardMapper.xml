@@ -5,6 +5,7 @@
   
 <mapper namespace="org.zerock.mapper.board.BoardMapper">
 
+<!-- 셀렉트 엘리먼트 -->
 	<select id="countAll" resultType="int">
 	SELECT COUNT(*) FROM Board
 	WHERE
@@ -31,7 +32,9 @@
 	VALUES (#{title}, #{content}, #{writer})
 	</insert>
 	
-	
+
+<!-- 조회된 컬럼명과 프로퍼티명이 같으면 자동으로 프로퍼티가 됨. 그래서 resultMap이 필요 없고 resultType만 써주면 됨	 -->
+<!-- 	반환타입이 List<BoardDto>인데도 그냥 BoardDto라고만 적어줘도 됨?  응. List의 아이템의 타입을 써주는거래 --> 
 	<select id="list" resultType="org.zerock.domain.board.BoardDto">
 	SELECT 
 		id,

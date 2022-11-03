@@ -6,9 +6,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.zerock.domain.board.BoardDto;
 import org.zerock.domain.board.PageInfo;
+import org.zerock.domain.board.PageInfo2;
 import org.zerock.mapper.board.BoardMapper;
 
-@Service
+@Service    //원래 @Component를 붙임 --> 비지니스로직을 담고 있는 component를 service라고 함
 public class BoardSerivce {
 
 	@Autowired
@@ -24,7 +25,9 @@ public class BoardSerivce {
 	}
 
 	// ---------r-----------
-	public List<BoardDto> listBoard(int page, String type, String keyword, PageInfo pageInfo) {
+	public List<BoardDto> listBoard(int page, String type, String keyword, PageInfo pageInfo,PageInfo2 pageInfo2) {
+		
+		pageInfo2.setSs("1231aa23");
 		int records = 10;
 		int offset = (page - 1) * records;
 		int countAll = mapper.countAll(type, "%" + keyword + "%");

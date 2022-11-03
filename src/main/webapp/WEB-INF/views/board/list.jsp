@@ -13,6 +13,17 @@
 </head>
 <body>
 	<my:navBar active="list"></my:navBar>
+	${j }
+	${j.name }
+	${j.address }
+	${j.currentPageNumber }
+	${pageInfo.hasPrevButton }
+	${pageInfo2.ss }
+	----
+	${pageInfo2.hasNextButton }
+	${pageInfo3.hasNextButton }
+	dddddq1
+	
 	
 	<div class="container-md">
 	
@@ -41,7 +52,9 @@
 							<tr>
 								<td>${board.id }</td>
 								<td>
-									<c:url value="/board/get" var="getLink">
+									
+									<!-- c:url을 쓰면 인코딩을 안해도 돼서 편하대.. -->
+									<c:url value="/board/get" var="getLink">      
 										<c:param name="id" value="${board.id }"></c:param>
 									</c:url>
 									<a href="${getLink }">
