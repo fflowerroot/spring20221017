@@ -6,12 +6,18 @@ import javax.servlet.jsp.PageContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.zerock.domain.lecture.JavaBean20;
+import org.zerock.domain.lecture.JavaBean21;
+import org.zerock.domain.lecture.JavaBean22;
+import org.zerock.domain.lecture.JavaBean23;
+import org.zerock.domain.lecture.JavaBean25;
+import org.zerock.domain.lecture.JavaBean27;
 
 //페이지 전체를 로딩(?)하지 않아도 요청을 주고받을 수있음.->ajax/xhr/
 //우리는 지금 ajax를 사용하는 라이브러리를 쓰지 않고 브라우저 기본메서드 fetch()를 쓰고 있음 ---> fetch말고 다른 것 써도 됨
@@ -51,7 +57,73 @@ public class Controller44 {
 		System.out.println("3번 메소드 일함");
 		System.out.println(data);
 	}
-}
+	
+	@PostMapping("sub04")
+	public void method04(@RequestBody JavaBean21 data) {
+		System.out.println(data);
+	}
+	
+	@PostMapping("sub05")
+	public void method05(@RequestBody JavaBean22 data) {
+		System.out.println(data);
+	}
+	
+	@PostMapping("sub06")
+	public void method06(@RequestBody JavaBean23 data) {
+		System.out.println(data);
+	}
+	
+	@PostMapping("sub07")
+	public void method07(@RequestBody JavaBean25 data) {
+		System.out.println(data);
+	}
+	
+	@PostMapping("sub14")
+	public void method14(@RequestBody JavaBean27 data) {
+		System.out.println(data);
+	}
+	@PostMapping("sub15/{아무이름}")
+	public void method15(@PathVariable("아무이름") String 아무이름 ){
+		System.out.println(아무이름);
+	}
+	// path variable 자동 형변환
+		// 파라미터명과 path variable 이름 같으면 value 속성 생략 가능
+		@GetMapping("sub16/{d}")
+		public void method16(@PathVariable int d) {
+			System.out.println(d); // 99
+		}
+	}
+
+
+// 여기까지 사용자가 서버에게 ajax 요청보내는 것 알아봄/
+//이제 서버에서 사용자에게 응답 보내는 것 알아볼 것임
+
+
+//?  지금까지 사용자가 버튼으로 요청하는게 폼에 서브밋 밖에 없었나? 서브밋은 리디렉트? 그래서  url이 바뀜?
+//->url이 바뀌면 페이지 전체 로딩인데 js의 fetch함수 적용된 버튼 누르면 url안바뀌고 요청이러서 전체 로딩 아님? 
+// -> 그렇다면 새로운 view파일이 아닌 다른 무언가가 바뀌어야하는데 그걸 어떻게 만듬 ? 
+//    -> 지금까지는 컨트롤러의 메서드가 보이드 타입이라서 jsp파일을 보여주는 거였음. 이제부터는 jsp파일이 아니라
+//        ajax로 응답해주는 것 할거임.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
