@@ -45,7 +45,7 @@ public class Controller18 {
 	
 	
 	@RequestMapping("sub04")
-	public String method04(Student s) {
+	public String method04(Student s, JavaBean01 j) {
 		s.setClassName("football");
 		s.setName("son");
 		s.setStudentNumber(7);

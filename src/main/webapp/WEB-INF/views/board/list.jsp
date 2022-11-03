@@ -23,6 +23,9 @@
 	${pageInfo2.hasNextButton }
 	${pageInfo3.hasNextButton }
 	dddddq1
+	${javaBean01 }
+	${javaBean01.name }
+	${javaBean01.address }
 	
 	
 	<div class="container-md">
