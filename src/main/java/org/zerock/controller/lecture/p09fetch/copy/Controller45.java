@@ -4,7 +4,9 @@ package org.zerock.controller.lecture.p09fetch.copy;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -12,6 +14,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.zerock.domain.lecture.JavaBean20;
 import org.zerock.domain.lecture.JavaBean24;
 import org.zerock.domain.lecture.JavaBean25;
 import org.zerock.domain.lecture.JavaBean26;
@@ -54,6 +57,8 @@ public class Controller45 {
 				.body("hello 안녕");
 	}
 
+	
+	//컨텐트타입을 json이라고 명시 안해줘도 json설치?해놔서 json으로 자동 응답됨 ?
 	@GetMapping("sub06")
 	public ResponseEntity<JavaBean24> m6() {
 		JavaBean24 data = new JavaBean24();
@@ -61,6 +66,15 @@ public class Controller45 {
 		data.setSince("2000");
 		return ResponseEntity.ok().body(data);
 	}// 지금은 우리가 데이터를 만들어서 넣었지만 보통 메퍼를 통해서 DB에서 가져올 것임.
+	
+	@GetMapping("sub07")
+	public ResponseEntity<JavaBean20> method07() {
+		JavaBean20 data = new JavaBean20();
+		data.setAddress("서울");
+		data.setName("손흥민");
+		
+		return ResponseEntity.ok(data);
+	}
 
 	@GetMapping("sub08")
 	public ResponseEntity<JavaBean27> method08() {
@@ -122,11 +136,58 @@ public class Controller45 {
 	public String method12() {
 		return "헬로 월드";
 	}
+	
+	// 자바빈을 리턴하는 것과 맵을 리턴하는 것이 결과가 같다? -> 응. 우리가 라이브러리 추가 했음
+	// Content-Type: application/json;charset=UTF-8 로 같음.
+	@GetMapping("sub13")
+	@ResponseBody //리턴값이 리스펀스바디라는 어노테이션이고, 객체와 맵을 json형태로 출력해준다. 
+	public Map<String, String> method13() {
+		Map<String, String> map = new HashMap<>();
+		map.put("address", "서울");
+		map.put("email", "abc@gmail.com");
+		map.put("age", "33");
+		
+		return map;
+	}
+	
+	@GetMapping("sub14")
+	@ResponseBody
+	public Map<String, Object> method14() {
+		Map<String, Object> map = new HashMap<>();
+		JavaBean25 data = new JavaBean25();
+		
+		JavaBean26 sub = new JavaBean26();
+		sub.setAddress(List.of("제주", "울릉도"));
+		sub.setMarried(false);
+		
+		data.setAge(99);
+		data.setInfo(sub);
+		
+		map.put("address", "부산");
+		map.put("age", 33);
+		map.put("married", true);
+		map.put("data", data);
+		
+		return map;
+	}
+	
+	@GetMapping("sub15")
+	@ResponseBody
+	public Map<String, Object> method15() {
+		Map<String, Object> map = new HashMap<>();
+		map.put("car", "tesla");
+		map.put("model", "avante");
+		map.put("color", List.of("blue", "red"));
+		
+		
+		return map;
+	}
 }
 	
 	
-	
-	
+// 히카리시피 
+// 메이븐 / 그레이들
+// 마이바티스 /jpa
 	
 	
 	
