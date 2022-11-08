@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.zerock.mapper">
+	<logger name="org.zerock.mapper">
 		<level value="debug" />
 	</logger>
 	

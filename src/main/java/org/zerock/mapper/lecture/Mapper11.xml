@@ -4,6 +4,35 @@
   "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="org.zerock.mapper.lecture.Mapper11">
+
+<delete id="deleteSupplier">
+DELETE  from Suppliers WHERE SupplierID=#{id}
+</delete>
+
+
+<select id="getSuppliers" resultType="org.zerock.domain.lecture.JavaBean19">
+select 
+	SupplierID id,
+	SupplierName name
+ from Suppliers
+	</select>
+
+		<select id="getCustomers" resultType="org.zerock.domain.lecture.JavaBean18">
+SELECT
+	CustomerId id,
+	CustomerName name,
+	ContactName,
+	Address,
+	City,
+	PostalCode, 
+	Country
+FROM 
+	Customers
+ORDER BY 
+	CustomerID DESC
+LIMIT 0, 10
+	</select>
+	
 	<select id="getCustomerById" resultType="org.zerock.domain.lecture.JavaBean18">
 SELECT
 	CustomerId id,
@@ -18,6 +47,8 @@ FROM
 WHERE
 	CustomerId = #{id}
 	</select>
+	
+
 
 	<update id="updateCustomer">
 UPDATE Customers

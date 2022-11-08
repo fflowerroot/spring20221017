@@ -6,6 +6,7 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -99,7 +100,7 @@ public class Controller47 {
 		return map;
 	}
 	
-	@PutMapping("sub10")
+	@PutMapping("sub10")  //@PostMapping과의 차이는 멱등성? -> post요청은 멱등성이 없다.
 	@ResponseBody
 	public Map<String, String> method10(@RequestBody JavaBean18 customer) {
 		Map<String, String> map = new HashMap<>();
@@ -125,6 +126,27 @@ public class Controller47 {
 		
 		return map;
 	}
+	
+
+	
+	
+	@DeleteMapping("sub15/{id}")
+	@ResponseBody
+	public Map<String, Object> method15(@PathVariable int id) {
+		Map<String, Object> map = new HashMap<>();
+		
+		int cnt = mapper.deleteSupplier(id);
+		
+		if (cnt == 1) {
+			map.put("message", id + "번 공급자정보가 삭제되었습니다.");
+		} else {
+			map.put("message", id + "번 공급자정보가 삭제되지 않았습니다.");
+		}
+		
+		return map;
+	}
+	
+	
 }
 
 
