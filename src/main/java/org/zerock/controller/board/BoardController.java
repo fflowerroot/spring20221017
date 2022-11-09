@@ -155,13 +155,16 @@ public class BoardController {
 	
 	
 	
-	//포워드하기 때문에 모델을 쓴거고, 리디렉트하니까  RedirectAttributes 쓴거임. ?
+
+	//쿼리스트링?, 세션?, 리디렉트어트리뷰트.. 등 넘겨주는 방법이 많음 (?)
 	@PostMapping("modify")
 	public String modify(BoardDto board, RedirectAttributes rttr) { // BoardDto board를 매개변수로 설정한 것이 리퀘스트파람을 수집,가공한거래
 		int cnt = service.update(board);
 		
 		if (cnt == 1) {
-			rttr.addFlashAttribute("message", board.getId() + "번 게시물이 수정되었습니다.");
+			rttr.addFlashAttribute("message", board.getId() + "번 게시물이 수정되었습니다."); 
+			//쿼리스트링으로 노출안되려고 플래시붙여줌 (?) FlashAttribute는 새션에 잠깐 넣어졌다가 모델로 옮겨지고 새션에서는 지워짐 (?)
+			//새션에 들어 있을 때 메세지가 나왔다가 새로고침하면 그 때는 새션에서 리퀘스트영역?으로 옮겨져서 메세지가 보이지 않음
 		} else {
 			rttr.addFlashAttribute("message", board.getId() + "번 게시물이 수정되지 않았습니다.");
 		}
@@ -179,7 +182,8 @@ public class BoardController {
 	
 	//----------------d-------------------
 	@PostMapping("remove")
-	public String remove(int id, RedirectAttributes rttr) {
+	public String remove(int id, RedirectAttributes rttr) {  //인풋폼에서 id가 리퀘스트파람으로 넘어옴
+		
 		int cnt = service.remove(id);
 		
 		if (cnt == 1) {
