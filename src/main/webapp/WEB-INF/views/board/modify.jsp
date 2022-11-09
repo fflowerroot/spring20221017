@@ -13,9 +13,11 @@
 </head>
 <body>
 	<my:navBar></my:navBar>
-	<h1>${board.id }번 게시물 수정</h1>
+	modify.jsp /
+	board.id ${board.id } 
 	
 	<form id="modifyForm" action="" method="post">
+<!-- 	아이디를 넘겨줘야하니까 인풋폼에 히든으로 넣어줌 -->
 	<input type="hidden" name="id" value="${board.id }">
 	제목 <input type="text" name="title" value="${board.title }"> <br>
 	본문 <textarea name="content">${board.content }</textarea> <br>

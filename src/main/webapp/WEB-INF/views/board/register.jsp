@@ -10,15 +10,15 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-Zenh87qX5JnK2Jl0vWa8Ck2rdkQ2Bzep5IDxbcnCeuOxjzrPF/et3URy9Bv1WTRi" crossorigin="anonymous">
 </head>
 <body>
-	<h1>게시물 작성</h1>  
+	register.jsp
 	
 	
 	<form action="" method="post">
 
 
-		제목 <input type="text" name="title"> <br>
-		본문 <textarea name="content"></textarea> <br>
-		작성자 <input type="text" name="writer"> <br>
+		title <input type="text" name="title"> <br>
+		content <textarea name="content"></textarea> <br>
+		writer <input type="text" name="writer"> <br>
 		
 		<input type="submit" value="등록">
 	

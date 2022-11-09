@@ -13,19 +13,7 @@
 </head>
 <body>
 	<my:navBar active="list"></my:navBar>
-	${j }
-	${j.name }
-	${j.address }
-	${j.currentPageNumber }
-	${pageInfo.hasPrevButton }
-	${pageInfo2.ss }
-	----
-	${pageInfo2.hasNextButton }
-	${pageInfo3.hasNextButton }
-	dddddq1
-	${javaBean01 }
-	${javaBean01.name }
-	${javaBean01.address }
+
 	
 	
 	<div class="container-md">
@@ -40,32 +28,45 @@
 					</div>
 				</c:if>
 				
-				<h1>게시물 목록</h1>
+			 list.jsp
 				<table class="table">
 					<thead>
 						<tr>
 							<th>#</th>
-							<th>제목</th>
-							<th>작성자</th>
-							<th>작성일시</th>
+							<th>title</th>
+							<th>writer</th>
+							<th>inserted</th>
 						</tr>
 					</thead>
 					<tbody>
+			
+				
+						
 						<c:forEach items="${boardList}" var="board">
+										
+						
+<!-- 	?? c:url을 쓰는 이유가 ?context path도 붙여주고 query string도 만들어주고 인코딩도 안해도 되서라는데.. 잘 모르겠음. -->
+<!-- 동일 소스로 context path를 자동 포함시키기 위함 입니다. -->
+<!-- 예를 들어 로컬은 context path 가 / 이고 -->
+<!-- 개발서버는 context path 가 /context 라고 하면 -->
+<!-- 로컬에서는 /resources/js/com.js 라고 선언해야 하고 -->
+<!-- 개발서버는 /context/resources/js/com.js 로 선언해야겠죠.. -->
+<%-- 이때 <c:url>로 감싸게 되면 동적으로 context path 정보를 가져와 앞에 붙혀주게 됩니다.. --%>
+<!-- 안쓰게 되면 개발서버에 올릴때마다 소스를 수정해야겠죠.. -->
+						
+						
+						
 							<tr>
 								<td>${board.id }</td>
+								<td><a href="<c:url value= "/board/get?id=${board.id }"/>">${board.title }</a></td>
+								<td><a href="/board/get?id=${board.id }">${board.writer }</a></td>
 								<td>
-									
-									<!-- c:url을 쓰면 인코딩을 안해도 돼서 편하대.. -->
-									<c:url value="/board/get" var="getLink">      
-										<c:param name="id" value="${board.id }"></c:param>
-									</c:url>
-									<a href="${getLink }">
-										${board.title }
-									</a>
-								</td>
-								<td>${board.writer }</td>
-								<td>${board.inserted }</td>
+								<c:url value="/board/get" var="getLink">      
+								<c:param name="id" value="${board.id }"></c:param>
+								</c:url>
+								<a href="${getLink }">${board.inserted }</a></td>
+<!-- 								? ? 페이지소스보기해서 봤을 때 context path  안붙어있는데 ? 선생님 거 복붙해도 안붙음/ 그런데 선생님 파일 실행하면 붙어있음... -->
+		
 							</tr>
 						</c:forEach> 
 					</tbody>
@@ -76,6 +77,10 @@
 		
 		
 		
+		
+<!-- 		--------------------paging------------------------------ -->
+
+
 		
 		
 <!-- 		<div class="row"> -->

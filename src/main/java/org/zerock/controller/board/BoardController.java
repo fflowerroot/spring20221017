@@ -7,6 +7,7 @@ import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -30,6 +31,13 @@ public class BoardController {
 
 
 	
+	
+	
+	
+	
+	
+	
+	
 	//------------------c----------------
 	
 	@GetMapping("register")
@@ -39,14 +47,21 @@ public class BoardController {
 	} //아무 입력없이 등록하면 null이 아니라 빈문자열로 등록됨
 	
 	
+	// jsp에서 넘어온 객체는 자바의 프로퍼티명과 어트리뷰트명이 일치하면 서브밋할 때 자동으로 객체에 넣어짐 ?
+		// 넣어진 객체는 자동으로 매개변수에 넣어짐 ?
+	
+	
 	@PostMapping("register") //register.jsp에서 action으로 넘어온./그러면 action은 리디렉트 ?
-	public String register(BoardDto board, RedirectAttributes rttr) { //RedirectAttributes는 redirect로 '넘겨줄' 어트리뷰트.
+	public String register(BoardDto board, 
+			RedirectAttributes rttr) { //RedirectAttributes는 redirect로 '넘겨줄' 어트리뷰트. 
+										// RedirectAttributes 안쓰고 모델로 넘겨줘도돼 ?
+		
 		// request param 수집/가공
 		// jsp 폼으로 입력받은 title,content,writer 3개 어트리뷰트가 넘어옴( 보드에 담겨서 넘어와 ?? -> 보드에 어트리뷰트명이랑 일치하는 프로퍼티가 있어서? )
 		
 		// business logic
 		int cnt = service.register(board);//서비스에 의존하고 있으니 의존성 주입 받아야함.
-		// ? xml 쿼리에서 인서트 반환타입 안적어줬는데 인트로 반환됨. 왜 ? 
+		                              //  xml 쿼리에서 인서트 반환타입 안적어줬는데 인트로 반환됨. 왜 ? 
 		
 		if (cnt == 1) {
 			rttr.addFlashAttribute("message", "새 게시물이 등록되었습니다.");
@@ -55,7 +70,7 @@ public class BoardController {
 		}
 		// ?? 넘겨주는 것들이 모델과 리퀘스트파람과 보드와 리디렉트어트리뷰트..등이 있음 -> 결국 어트리뷰트들이 어디붙어서 넘어감?
 		
-		// /board/list로 redirect
+
 		return "redirect:/board/list";
 	}
 	
@@ -64,6 +79,7 @@ public class BoardController {
 	
 	
 	//-------------------r-----------------
+	//register에서 list로 넘어온건 없고 db에서 셀렉해서 보여줘야됨
 	@GetMapping("list")    //여기서 포워드로 넘겨주는거라서 여기까지 객체?가 와야함.
 	public void list(
 			@RequestParam(name="page", defaultValue="1")int page,
@@ -71,22 +87,23 @@ public class BoardController {
 			@RequestParam(name="q", defaultValue="") String keyword, 		
 			PageInfo pageInfo, 
 			PageInfo2 pageInfo2, 
-			PageInfo2 pageInfo3, 
-			JavaBean01 j,
+			
 			Model model) { // 리퀘스트파람은 처음엔 넘어올게 없어서 기본값 세팅해준거로 넘어가고,
-							// 페이지인포는 스프링이 넣어주고?  ...... 페이인포타입의 매개변수명이 중요한게 아니라.. 클래스명의 앞글자를 소문자로 바꾼게 어트리뷰트명이되는거였음 ..; 
-							// 모델도 스프링이 넣어주고? 모델에는 뭐가 담겨있어 ? ?
-							// (모델은 디스페처서블릿이 관리해줌)	
+							// 페이지인포는 자동주입.페이인포타입의 매개변수명이 중요한게 아니라.. 클래스명의 앞글자를 소문자로 바꾼게 어트리뷰트명이되는거였음 ..; 
+							// 모델도 스프링이 넣어주고 모델에는 아래에서 객체리스트 넣어줌. (모델은 디스페처서블릿이 관리해줌)
+						    // ? ? 매개변수에 List<BoardDto>라고 쓰면 자동주입 안됨 ? (리스트는 자동주입 안됨?) 만약 되면, jsp어트리뷰트명 뭐로 넘어감 ?
 							// 기본타입은 리퀘스트파람으로 간주되고, 참조타입은 모델어트리뷰트로 간주됨(어트리뷰트명은 클래스명 앞글자 소문자로 바꾼것!).
 							
 		// request param
 		
 		// business logic
-		List<BoardDto> list = service.listBoard(page, type, keyword, pageInfo, pageInfo2); //서비스의 listBoard메서드를 실행해서 보드리스트를 가져옴
-		j.setAddress("aaaaaa1");
+		   // 셀렉해서 가져와서 보여줌
+		List<BoardDto> list = service.listBoard(page, type, keyword, pageInfo); //서비스의 listBoard메서드를 실행해서 보드리스트를 가져옴
+		
 		
 		// add attribute
-		model.addAttribute("boardList", list); //모델에 꼭 넣어줘야함? //board로 넘겨줘도 됨 ?
+		model.addAttribute("boardList", list); 
+		
 		// forward
 	}
 	// 존재하지 않으면 객체 생성.리퀘스트파라미터 네임과 일치하는 필드네임을? 쓴다. ->데이터바인딩.
@@ -94,25 +111,38 @@ public class BoardController {
 	
 	
 	
-
+//list에서 넘어온 id로 보드객체 쿼리에서 셀렉해서 보여주기
 	@GetMapping("get") 
 	public void get(
 			// @RequestParam 생략 가능 -> 기본타입(String포함?)이면 리퀘스트파람으로 간주된대
-			@RequestParam(name = "id") int id,
-			Model model) {
+			int id,
+			BoardDto boardDto,
+			PageInfo2 p
+			) {
+		
 		// req param
+		
 		// business logic (게시물 db에서 가져오기)
-		BoardDto board = service.get(id);
-		// add attribute
-		model.addAttribute("board", board);
+		boardDto = service.get(id);
+		boardDto.setTitle("titletitle..");
+		System.out.println(boardDto);
+		System.out.println(boardDto.getId()); //콘솔 출력됨 
+		System.out.println(boardDto.getTitle()); // 콘솔 출력됨// ? ? 그런데 왜 id를 제외한 나머지는 어트리뷰트로 안넘어가지 ?
+		p.setLastPageNumber(1111111); //이건 어트리뷰트로 넘어감.
+		System.out.println(p.getLastPageNumber());
+		
+		
+		// add attribute 
+	//	model.addAttribute("board", board);
+		 
 		// forward
 		
 	}
 	
 	
 	
-	
-	
+	// href(리퀘스트파람만 가능?),인풋폼(어트리뷰트,리퀘스트파람),fetch(어트리뷰트 가능,리퀘스트파람 가능 ? ) 로 넘김.
+	// 인풋폼도 원래는 리퀘스트파람으로 넘어가는건데.. 프로퍼티명과 일치하면 자동주입되는거야 ?
 	
 	
 	
@@ -121,11 +151,13 @@ public class BoardController {
 	public void modify(int id, Model model) {
 		BoardDto board = service.get(id);
 		model.addAttribute("board", board);
-		
 	}
-	//포워드하기 때문에 모델을 쓴거고, 리디렉트하니까  RedirectAttributes 쓴거임.
+	
+	
+	
+	//포워드하기 때문에 모델을 쓴거고, 리디렉트하니까  RedirectAttributes 쓴거임. ?
 	@PostMapping("modify")
-	public String modify(BoardDto board, RedirectAttributes rttr) {
+	public String modify(BoardDto board, RedirectAttributes rttr) { // BoardDto board를 매개변수로 설정한 것이 리퀘스트파람을 수집,가공한거래
 		int cnt = service.update(board);
 		
 		if (cnt == 1) {

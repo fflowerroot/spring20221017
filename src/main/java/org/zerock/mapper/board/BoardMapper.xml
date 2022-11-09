@@ -5,36 +5,17 @@
   
 <mapper namespace="org.zerock.mapper.board.BoardMapper">
 
-<!-- 셀렉트 엘리먼트 -->
-	<select id="countAll" resultType="int">
-	SELECT COUNT(*) FROM Board
-	WHERE
-		<trim prefixOverrides="OR">
-			<if test="type == 'all' or type == 'title'">
-			OR title LIKE #{keyword}
-			</if>
-			
-			<if test="type == 'all' or type == 'content'">
-			OR content LIKE #{keyword}
-			</if>
-			
-			<if test="type == 'all' or type == 'writer'">
-			OR writer LIKE #{keyword}
-			</if>
-		</trim>
-	</select>
-
-
 
 <!-- 	여기서 반환타입 안적어줬는데 인트로 반환됨. -->
+<!-- register.jsp의 form에서 넘어온 프로퍼티 db에 등록 -->
 	<insert id="insert">
 	INSERT INTO Board (title, content, writer)
 	VALUES (#{title}, #{content}, #{writer})
 	</insert>
 	
-
+<!-- 셀렉트 엘리먼트 -->
 <!-- 조회된 컬럼명과 프로퍼티명이 같으면 자동으로 프로퍼티가 됨. 그래서 resultMap이 필요 없고 resultType만 써주면 됨	 -->
-<!-- 	반환타입이 List<BoardDto>인데도 그냥 BoardDto라고만 적어줘도 됨?  응. List의 아이템의 타입을 써주는거래 --> 
+<!-- 	반환타입이 List<BoardDto>인데도 그냥 BoardDto라고만 줌.  List의 아이템의 타입을 써주는거임 --> 
 	<select id="list" resultType="org.zerock.domain.board.BoardDto">
 	SELECT 
 		id,
@@ -62,7 +43,8 @@
 	LIMIT #{offset}, #{records}
 	</select>
 	
-	<select id="select" resultType="org.zerock.domain.board.BoardDto">
+<!-- 복잡한 매핑이 아니라서 자동으로 프로퍼티에 담기도록 만들었다고? -->
+<select id="select" resultType="org.zerock.domain.board.BoardDto">
 	SELECT
 		id,
 		title,
@@ -74,6 +56,28 @@
 	WHERE
 		id = #{id}
 	</select>
+
+	<select id="countAll" resultType="int">
+	SELECT COUNT(*) FROM Board
+	WHERE
+		<trim prefixOverrides="OR">
+			<if test="type == 'all' or type == 'title'">
+			OR title LIKE #{keyword}
+			</if>
+			
+			<if test="type == 'all' or type == 'content'">
+			OR content LIKE #{keyword}
+			</if>
+			
+			<if test="type == 'all' or type == 'writer'">
+			OR writer LIKE #{keyword}
+			</if>
+		</trim>
+	</select>
+	
+	
+	
+	
 	
 	<update id="update">
 	UPDATE Board
@@ -85,10 +89,17 @@
 		id = #{id}
 	</update>
 	
+	
+	
+	
+	
 	<delete id="delete">
 	DELETE FROM Board
 	WHERE id = #{id}
 	</delete>
+
+
+
 
 </mapper>
 

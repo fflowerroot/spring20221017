@@ -16,18 +16,15 @@ public class BoardSerivce {
 	private BoardMapper mapper;
 
 	
-	
-	
-	
 	// ---------c-----------
-	public int register(BoardDto board) {
+	public int register(BoardDto board) {  //아무 역할 없이 mapper.insert(board) 호출 / 단지 메서드명이 register에서 insert로 바뀜.
 		return mapper.insert(board);
 	}
 
 	// ---------r-----------
-	public List<BoardDto> listBoard(int page, String type, String keyword, PageInfo pageInfo,PageInfo2 pageInfo2) {
+	public List<BoardDto> listBoard(int page, String type, String keyword, PageInfo pageInfo) {
 		
-		pageInfo2.setSs("1231aa23");
+		
 		int records = 10;
 		int offset = (page - 1) * records;
 		int countAll = mapper.countAll(type, "%" + keyword + "%");

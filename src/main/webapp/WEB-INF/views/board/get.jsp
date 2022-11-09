@@ -19,51 +19,58 @@
 <!-- 			<div class="col"> -->
 			
 	
-				<h1>
-					${board.id }번 게시물
+			
+					id ${boardDto.id }.. <br />
+					${boardDto.title }.. <br />
+					${boardDto.writer }.. <br />
+					${boardDto.inserted }.. <br />
+					${pageInfo2.lastPageNumber }.. <br />
 					 
-<%-- 					<c:url value="/board/modify" var="modifyLink"> --%>
-<%-- 						<c:param name="id" value="${board.id }"></c:param> --%>
+<%-- 					<c:url value="/boardDto/modify" var="modifyLink"> --%>
+<%-- 						<c:param name="id" value="${boardDto.id }"></c:param> --%>
 <%-- 					</c:url> --%>
-					<a class="btn btn-warning" href="/board/modify?id=+${board.id  }">
-						수정/삭제
+
+<!-- 					부트스트랩은 적절한 클래스만 잘 추가해주면 됨? -->
+<!-- 					버튼 클래스 추가 -->
+					<a class="btn btn-warning" href="/board/modify?id=${boardDto.id  }">
+						modify/delete
 <!-- 					<i class="fa-solid fa-pen-to-square"></i> -->
-					</a>
-				</h1>
+					</a><br />
+			
 			
 <!-- 				<div class="mb-3"> -->
 <!-- 					<label class="form-label"> -->
-						제목 
+						title         
 <!-- 					</label> -->
-<%-- 					<input class="form-control" type="text" value="${board.title }" readonly> --%>
-						<input class="form-control"type="text" value= "${board.title }" readonly/> <br />
+<%-- 					<input class="form-control" type="text" value="${boardDto.title }" readonly> --%>
+						<input type="text" value= "${boardDto.title }" readonly/> <br />
 						
 <!-- 				</div>	 -->
 				
 <!-- 				<div class="mb-3"> -->
 <!-- 					<label for="" class="form-label"> -->
-					본문 
+					content 
 <!-- 					</label> -->
-<%-- 					<textarea rows="5" class="form-control" readonly>${board.content }</textarea> --%>
-					<textarea  readonly>${board.content }</textarea><br />
+<%-- 					<textarea rows="5" class="form-control" readonly>${boardDto.content }</textarea> --%>
+					<textarea  readonly>${boardDto.content }</textarea><br />
 					
 <!-- 				</div> -->
 				
 <!-- 				<div class="mb-3"> -->
 <!-- 					<label for="" class="form-label"> -->
-						작성자 
+						writer   
 <!-- 					</label> -->
-<%-- 					<input class="form-control" type="text" value="${board.writer }" readonly> --%>
-					<input type="text" value="${board.writer }" readonly> <br />
+<%-- 					<input class="form-control" type="text" value="${boardDto.writer }" readonly> --%>
+					<input type="text" value="${boardDto.writer }" readonly> <br />
 <!-- 				</div> -->
 				
 <!-- 				<div class="mb-3"> -->
 <!-- 					<label for="" class="form-label"> -->
-						작성일시 
+						inserted 
 <!-- 					</label> -->
-					<input type="datetime-local" value="${board.inserted }" readonly> <br />
-					작성일시 <input type="text" value="${board.inserted }" readonly>
-<%-- 					<input class="form-control" type="datetime-local" value="${board.inserted }" readonly> --%>
+					<input type="datetime-local" value="${boardDto.inserted }" readonly> <br />
+					inserted <input type="text" value="${boardDto.inserted }" readonly>
+<%-- 					<input class="form-control" type="datetime-local" value="${boardDto.inserted }" readonly> --%>
 <!-- 				</div> -->
 	
 	
@@ -79,9 +86,9 @@
 <!-- 	<div class="container-md"> -->
 <!-- 		<div class="row"> -->
 <!-- 			<div class="col"> -->
-				<input type="hidden" id="boardId" value="${board.id }">
+				<input type="hidden" id="boardId" value="${boardDto.id }">
 				<input type="text" id="replyInput1">
-				<button id="replySendButton1">댓글쓰기</button>
+				<button id="replySendButton1">reply</button>
 <!-- 			</div> -->
 <!-- 		</div> -->
 		
