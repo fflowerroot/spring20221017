@@ -25,7 +25,7 @@
 	</bean>
 
 	<context:property-placeholder
-		location="/WEB-INF/props/jdbc.properties" />
+		location="/WEB-INF/props/jdbc.properties,/WEB-INF/props/aws.properties" />
 
 	<!-- mapper 스캔 -->
 	<mybatis-spring:scan
