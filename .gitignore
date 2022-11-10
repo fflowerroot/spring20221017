@@ -7,3 +7,4 @@ build/
 .springBeans
 src/main/webapp/WEB-INF/props/jdbc.properties
 src/main/webapp/WEB-INF/props/aws.propertis
+src/main/webapp/WEB-INF/props/aws.properties
