@@ -117,8 +117,10 @@ public class BoardController {
 	public void get(
 			// @RequestParam 생략 가능 -> 기본타입(String포함?)이면 리퀘스트파람으로 간주된대
 			int id,
+			Model model,
 			BoardDto boardDto,
 			PageInfo2 p
+			
 			) {
 		
 		// req param
@@ -132,9 +134,9 @@ public class BoardController {
 		p.setLastPageNumber(1111111); //이건 어트리뷰트로 넘어감.
 		System.out.println(p.getLastPageNumber());
 		
-		
+		BoardDto board = service.get(id);
 		// add attribute 
-	//	model.addAttribute("board", board);
+		model.addAttribute("board", board);
 		 
 		// forward
 		

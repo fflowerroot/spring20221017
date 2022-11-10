@@ -4,13 +4,18 @@ import java.io.File;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import org.zerock.domain.board.BoardDto;
 import org.zerock.domain.board.PageInfo;
-import org.zerock.domain.board.PageInfo2;
 import org.zerock.mapper.board.BoardMapper;
 import org.zerock.mapper.board.ReplyMapper;
+
+import software.amazon.awssdk.core.sync.RequestBody;
+import software.amazon.awssdk.services.s3.S3Client;
+import software.amazon.awssdk.services.s3.model.ObjectCannedACL;
+import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 
 @Service    //원래 @Component를 붙임 --> 비지니스로직을 담고 있는 component를 service라고 함
 public class BoardSerivce {
@@ -20,6 +25,12 @@ public class BoardSerivce {
 	
 	@Autowired
 	private ReplyMapper replyMapper;
+	
+	@Autowired
+	private S3Client s3Client;
+	
+	@Value("aws.s3.bucket")
+	private String bucketName;
 	
 	// ---------c-----------
 	public int register(BoardDto board) {  //아무 역할 없이 mapper.insert(board) 호출 / 단지 메서드명이 register에서 insert로 바뀜.
@@ -35,22 +46,47 @@ public class BoardSerivce {
 				// db에 파일 정보 저장
 				boardMapper.insertFile(board.getId(), file.getOriginalFilename());
 				
-				// 파일 저장
-				// board id 이름의 새폴더 만들기
-				File folder = new File("C:\\Users\\user\\Desktop\\study\\upload\\prj1\\board\\" + board.getId());
-				folder.mkdirs();
-				
-				File dest = new File(folder, file.getOriginalFilename());
-				
 				try {
-					file.transferTo(dest);
+					// S3에 파일 저장
+					// 키 생성
+					String key = "prj1/board/" + board.getId() + "/" + file.getOriginalFilename();
+					
+					// putObjectRequest
+					PutObjectRequest putObjectRequest = PutObjectRequest.builder()
+							.bucket(bucketName)
+							.key(key)
+							.acl(ObjectCannedACL.PUBLIC_READ)
+							.build();
+					
+					// requestBody
+					RequestBody requestBody = RequestBody.fromInputStream(file.getInputStream(), file.getSize());
+					
+					// object(파일) 올리기
+					s3Client.putObject(putObjectRequest, requestBody);
+					
 				} catch (Exception e) {
-					// @Transactional은 RuntimeException에서만 rollback 됨
 					e.printStackTrace();
 					throw new RuntimeException(e);
 				}
 			}
 		}
+				
+//				// 파일 저장
+//				// board id 이름의 새폴더 만들기
+//				File folder = new File("C:\\Users\\user\\Desktop\\study\\upload\\prj1\\board\\" + board.getId());
+//				folder.mkdirs();
+//				
+//				File dest = new File(folder, file.getOriginalFilename());
+//				
+//				try {
+//					file.transferTo(dest);
+//				} catch (Exception e) {
+//					// @Transactional은 RuntimeException에서만 rollback 됨
+//					e.printStackTrace();
+//					throw new RuntimeException(e);
+//				}
+//			}
+//		}
 		
 		return cnt;
 	}
