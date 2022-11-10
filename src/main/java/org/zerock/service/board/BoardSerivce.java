@@ -29,7 +29,7 @@ public class BoardSerivce {
 	@Autowired
 	private S3Client s3Client;
 	
-	@Value("aws.s3.bucket")
+	@Value("${aws.s3.bucket}") //@Value("aws.s3.bucket") 이렇게해도 작동됐던 것 같은데 ? 
 	private String bucketName;
 	
 	// ---------c-----------

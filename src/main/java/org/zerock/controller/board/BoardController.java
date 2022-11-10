@@ -160,6 +160,7 @@ public class BoardController {
 	
 	//포워드하기 때문에 모델을 쓴거고, 리디렉트하니까  RedirectAttributes 쓴거임. ?
 	// BoardDto board를 매개변수로 설정한 것이 리퀘스트파람을 수집,가공한거래
+	
 	@PostMapping("modify")
 	public String modify(
 			BoardDto board, 
