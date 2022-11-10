@@ -52,4 +52,3 @@ public class BoardDto {   // Data Transfer Object
 		return result;
 	}
 }
-//ggggggg

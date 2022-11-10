@@ -59,15 +59,29 @@
 						
 							<tr>
 								<td>${board.id }</td>
-								<td><a href="<c:url value= "/board/get?id=${board.id }"/>">${board.title }</a></td>
+								<td><a href="<c:url value= "/board/get?id=${board.id }"/>">${board.title }</a>
+								<%-- 댓글 수 출력 --%>
+									<c:if test="${board.countReply > 0 }">
+										<span class="badge rounded-pill text-bg-light">
+											<i class="fa-regular fa-comment-dots"></i>
+											${board.countReply }
+										</span>
+									</c:if>
+									
+									<%-- 파일 수 출력 --%>
+									<c:if test="${board.countFile > 0 }">
+										<span class="badge rounded-pill text-bg-light">
+											<i class="fa-regular fa-file"></i>
+											${board.countFile }
+										</span>
+									</c:if>
+									</td>
 								<td><a href="/board/get?id=${board.id }">${board.writer }</a></td>
 								<td>
 								<c:url value="/board/get" var="getLink">      
 								<c:param name="id" value="${board.id }"></c:param>
 								</c:url>
 								<a href="${getLink }">${board.inserted }</a></td>
-<!-- 								? ? 페이지소스보기해서 봤을 때 context path  안붙어있는데 ? 선생님 거 복붙해도 안붙음/ 그런데 선생님 파일 실행하면 붙어있음... -->
-		
 							</tr>
 						</c:forEach> 
 					</tbody>
@@ -90,7 +104,7 @@
 				  <ul class="pagination justify-content-center">
 				  
 				  	 				  	<%-- 맨앞 버튼은 1페이지가 아니면 존재함 --%>
-				  	<c:if test="${pageInfo.currentPageNumber ne 1 }">
+				  	<c:if test="${pageInfo.page ne 1 }">
 				  		<c:url value="/board/list" var="listLink">
 				  			<c:param name="page" value="1" />
 				  			<c:param name="q" value="${param.q }" />
@@ -117,19 +131,28 @@
 				  		</li>
 				  	</c:if>
 				  	
-					 <c:forEach begin="${pageInfo.leftPageNumber}" end ="${pageInfo.rightPageNumber }" var="pageNumber">
+				  
+					<!-- 	페이지출력   >>  페이지번호 출력, 요청페이지파람 붙은 링크 걸어줌, 요청페이지와 페이지번호가 같으면 엑티브-->
+					<!--컨트롤러가 요청페이지를 페이지인포의 페이지에 담았음 -->
+					<!-- 그리고 페이지번호를 클릭하면 그게 요청페이지임.  -->
+					 <c:forEach begin="${pageInfo.leftPageNumber}" end ="${pageInfo.rightPageNumber }" var="page">
 
 					 	<c:url value="/board/list" var="listLink">
-					 		<c:param name="page" value="${pageNumber}"></c:param>
+					 		<c:param name="page" value="${page}"></c:param>  <!-- 페이지번호를 클릭하면 그게 요청페이지  -->
+					 		<c:param name="q" value="${param.q }" />
 					 		<c:param name="t" value="${param.t }"></c:param>
 					 	</c:url>
 
-					    <li class="page-item ${pageInfo.currentPageNumber eq pageNumber ? 'active' : '' }"><a class="page-link" href="${listLink }">  ${pageNumber}  </a>
+<%-- 					    <li class="page-item ${pageInfo.page eq page ? 'active' : '' }"><a class="page-link" href="${listLink }">  ${page}  </a> --%>
+					    <li class="page-item ${param.page eq page ? 'active' : '' }"><a class="page-link" href="${listLink }">  ${page}  </a>
+						<!-- 엑티브설정 -> 페이지번호와 요청페이지가 같아지려면 클릭을 해야함. 클릭하면 하이퍼링크로 요청보내지고 그 순간 같아짐 -->
 					    </li>
 	
 					 </c:forEach>
 					 
-					 		  	<c:if test="${pageInfo.hasNextButton }">
+					 
+					 
+					 	<c:if test="${pageInfo.hasNextButton }">
 				  		<c:url value="/board/list" var="listLink">
 				  			<c:param name="page" value="${pageInfo.jumpNextPageNumber }"></c:param>
 				  			<c:param name="q" value="${param.q }" />
@@ -143,7 +166,7 @@
 				  	</c:if>
 				  	
 				  	
-				  	<c:if test="${pageInfo.currentPageNumber ne pageInfo.lastPageNumber }">
+				  	<c:if test="${pageInfo.page ne pageInfo.lastPageNumber }">
 				  		<c:url value="/board/list" var="listLink">
 				  			<c:param value="${pageInfo.lastPageNumber }" name="page" />
 				  			<c:param name="q" value="${param.q }" />

@@ -81,14 +81,14 @@ public class BoardController {
 	
 	//-------------------r-----------------
 	//register에서 list로 넘어온건 없고 db에서 셀렉해서 보여줘야됨
+	 // 현재page의 이름을 다 같게 page라고 해도 문제없어 보이는게 
+	// 	  ->	모델은 ${어트리뷰트.page}, 리퀘파람은 ${param.page}, jstl태그 변수는 ${page}
 	@GetMapping("list")    //여기서 포워드로 넘겨주는거라서 여기까지 객체?가 와야함.
 	public void list(
-			@RequestParam(name="page", defaultValue="1")int page,
+			@RequestParam(name="page", defaultValue="1")int page, //page가 현재page // 쿼리의 limit offset,records와 page가 매칭되도록은 서비스에서 했음.
 			@RequestParam(name="t", defaultValue="all") String type, 
 			@RequestParam(name="q", defaultValue="") String keyword, 		
 			PageInfo pageInfo, 
-			PageInfo2 pageInfo2, 
-			
 			Model model) { // 리퀘스트파람은 처음엔 넘어올게 없어서 기본값 세팅해준거로 넘어가고,
 							// 페이지인포는 자동주입.페이인포타입의 매개변수명이 중요한게 아니라.. 클래스명의 앞글자를 소문자로 바꾼게 어트리뷰트명이되는거였음 ..; 
 							// 모델도 스프링이 넣어주고 모델에는 아래에서 객체리스트 넣어줌. (모델은 디스페처서블릿이 관리해줌)
@@ -108,6 +108,9 @@ public class BoardController {
 		// forward
 	}
 	// 존재하지 않으면 객체 생성.리퀘스트파라미터 네임과 일치하는 필드네임을? 쓴다. ->데이터바인딩.
+	
+	
+	
 	
 	
 	

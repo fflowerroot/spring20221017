@@ -18,28 +18,32 @@
 <!-- 	반환타입이 List<BoardDto>인데도 그냥 BoardDto라고만 줌.  List의 아이템의 타입을 써주는거임 --> 
 	<select id="list" resultType="org.zerock.domain.board.BoardDto">
 	SELECT 
-		id,
-		title,
-		writer,
-		inserted
-	FROM Board
+		b.id,
+		b.title,
+		b.writer,
+		b.inserted,
+		COUNT(DISTINCT r.id) countReply,
+		COUNT(DISTINCT f.id) countFile
+	FROM Board b LEFT JOIN Reply r ON b.id = r.boardId
+	             LEFT JOIN File f ON b.id = f.boardId
 	WHERE
 		
 		<trim prefixOverrides="OR">
 			<if test="type == 'all' or type == 'title'">
-			OR title LIKE #{keyword}
+			OR b.title LIKE #{keyword}
 			</if>
 			
 			<if test="type == 'all' or type == 'content'">
-			OR content LIKE #{keyword}
+			OR b.content LIKE #{keyword}
 			</if>
 			
 			<if test="type == 'all' or type == 'writer'">
-			OR writer LIKE #{keyword}
+			OR b.writer LIKE #{keyword}
 			</if>
 		</trim>
 	
-	ORDER BY id DESC
+	GROUP BY b.id
+	ORDER BY b.id DESC
 	LIMIT #{offset}, #{records}
 	</select>
 	
@@ -84,6 +88,21 @@
 			</if>
 		</trim>
 	</select>
+	
+		<delete id="deleteFileByBoardIdAndFileName">
+	DELETE FROM File
+	WHERE boardId = #{id} AND name = #{fileName}
+	</delete>
+
+	<delete id="deleteFileByBoardId">
+	DELETE FROM File
+	WHERE boardId = #{id}
+	</delete>
+
+	<insert id="insertFile">
+	INSERT INTO File (boardId, name)
+	VALUES (#{id}, #{fileName})
+	</insert>
 	
 	
 	
