@@ -17,14 +17,20 @@ public interface BoardMapper {
 	
 	BoardDto select(int id);
 	
+	int countAll(String type, String keyword);
+	
 	//---------u-----------
 	int update(BoardDto board);
 	
 	//---------d-----------
 	int delete(int id);
 
-	int countAll(String type, String keyword);
+	//--
+	int insertFile(int id, String fileName);
 
+	int deleteFileByBoardId(int id);
+
+	int deleteFileByBoardIdAndFileName(int id, String fileName);
 
 
 }

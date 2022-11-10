@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.zerock.domain.board.BoardDto;
 import org.zerock.domain.board.JavaBean01;
@@ -156,9 +157,15 @@ public class BoardController {
 	
 	
 	//포워드하기 때문에 모델을 쓴거고, 리디렉트하니까  RedirectAttributes 쓴거임. ?
+	// BoardDto board를 매개변수로 설정한 것이 리퀘스트파람을 수집,가공한거래
 	@PostMapping("modify")
-	public String modify(BoardDto board, RedirectAttributes rttr) { // BoardDto board를 매개변수로 설정한 것이 리퀘스트파람을 수집,가공한거래
-		int cnt = service.update(board);
+	public String modify(
+			BoardDto board, 
+			@RequestParam("files") MultipartFile[] addFiles,
+			@RequestParam(name = "removeFiles", required = false) List<String> removeFiles,
+			RedirectAttributes rttr) {
+		
+		int cnt = service.update(board, addFiles, removeFiles);
 		
 		if (cnt == 1) {
 			rttr.addFlashAttribute("message", board.getId() + "번 게시물이 수정되었습니다.");
