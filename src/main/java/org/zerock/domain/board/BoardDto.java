@@ -16,3 +16,4 @@ public class BoardDto {   // Data Transfer Object
 	private String writer;
 	private LocalDateTime inserted; // db에서 오토로 설정
 }
+//ggggggg
