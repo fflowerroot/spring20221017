@@ -16,11 +16,20 @@
 
 <body>
 	<my:navBar></my:navBar>
+	
+	aaa
 				id ${boardDto.id }.. <br />
+				<input class="form-control" type="text" value="${boardDto.title }" readonly="">
 					${boardDto.title }.. <br />
 					${boardDto.writer }.. <br />
 					${boardDto.inserted }.. <br />
 					${pageInfo2.lastPageNumber }.. <br />
+					${ay.s }.. <br />
+					${ay.i }.. <br />
+					----
+					${u }.. <br />
+					
+					
 	
 	<div class="container-md">
 		<div class="row">

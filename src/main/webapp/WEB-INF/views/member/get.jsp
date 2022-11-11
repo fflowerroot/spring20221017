@@ -16,11 +16,17 @@
 
 <body>
 	<my:navBar></my:navBar>
+	
+	
+	<div>
+	aa
 				id ${boardDto.id }.. <br />
-					${boardDto.title }.. <br />
+				aa${boardDto.title }.. <br />
 					${boardDto.writer }.. <br />
 					${boardDto.inserted }.. <br />
 					${pageInfo2.lastPageNumber }.. <br />
+	</div>
+	
 	
 	<div class="container-md">
 		<div class="row">

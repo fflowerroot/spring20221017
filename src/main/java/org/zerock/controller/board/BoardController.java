@@ -2,6 +2,9 @@ package org.zerock.controller.board;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
@@ -11,8 +14,10 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.support.SessionStatus;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.zerock.domain.board.Ay;
 import org.zerock.domain.board.BoardDto;
 import org.zerock.domain.board.JavaBean01;
 import org.zerock.domain.board.PageInfo;
@@ -122,14 +127,16 @@ public class BoardController {
 			int id,
 			Model model,
 			BoardDto boardDto,
-			PageInfo2 p
-			
+			PageInfo2 p,
+			Ay a,
+			HttpSession session
 			) {
 		
 		// req param
 		
 		// business logic (게시물 db에서 가져오기)
-		boardDto = service.get(id);
+		BoardDto board = service.get(id); 
+		boardDto.setId(114);
 		boardDto.setTitle("titletitle..");
 		System.out.println(boardDto);
 		System.out.println(boardDto.getId()); //콘솔 출력됨 
@@ -137,7 +144,15 @@ public class BoardController {
 		p.setLastPageNumber(1111111); //이건 어트리뷰트로 넘어감.
 		System.out.println(p.getLastPageNumber());
 		
-		BoardDto board = service.get(id);
+		a.setS("ss");
+		a.setI(121212);
+		
+		
+		session.setAttribute("u", "dd");
+		
+		
+		
+	//	BoardDto board = service.get(id);
 		// add attribute 
 		model.addAttribute("board", board);
 		 
