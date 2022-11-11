@@ -15,7 +15,7 @@ public class Controller14 {
 	@RequestMapping("sub01")
 	public void m1(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
 		System.out.println("m1");
-		String path = "";
+		String path = "/WEB-INF/views/ex14/sub01.jsp";
 		req.getRequestDispatcher(path).forward(req, res);
 	}
 

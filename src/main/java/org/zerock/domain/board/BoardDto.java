@@ -5,9 +5,12 @@ import java.time.Period;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
+import org.springframework.stereotype.Component;
+
 import lombok.Data;
 
 @Data
+@Component
 public class BoardDto {   // Data Transfer Object
 
 	

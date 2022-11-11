@@ -8,9 +8,12 @@
 }
 </style>
 
+<!-- 폼안에 버튼은 타입이 서브밋이 아니더라도 서브밋 역할을 함 -->
 
 <c:url value="/board/list" var="listLink" />
 <c:url value="/board/register" var="registerLink" />
+<%-- <c:url value="/member/list" var="listLink" /> --%>
+<%-- <c:url value="/member/register" var="registerLink" /> --%>
 
 <nav class="navbar navbar-expand-md bg-light">
   <div class="container-md">
@@ -29,7 +32,19 @@
         <li class="nav-item">
           <a class="nav-link ${active eq 'register' ? 'active' : '' }" href="${registerLink }">작성</a>
         </li>
+         <li class="nav-item">
+          <a class="nav-link ${active eq 'memberList' ? 'active' : '' }" href="<c:url value="/member/list"/>">회원목록</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link ${active eq 'memberRegister' ? 'active' : '' }" href="<c:url value="/member/register"  />">Sign up</a>
+        </li>
+        
       </ul>
+      
+      
+      
+      
+      
       
       
 <!--       컨트롤러에 리퀘파람 q 넘겨줘서 검색쿼리날리게 할거임 -->
@@ -52,8 +67,8 @@
     </div>
   </div>
 </nav>
-      <form action=""><input type="search" /></form>  <br />
-      <form action=""> <input type="text" /></form>
+<!--       <form action=""><input type="search" /></form>  <br /> -->
+<!--       <form action=""> <input type="text" /></form> -->
 
 
 

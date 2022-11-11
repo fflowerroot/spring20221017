@@ -18,6 +18,7 @@ public class CustomConfig {
 	
 	@Value("${aws.accessKeyId}")
 	private String accessKeyId;
+	
 	@Value("${aws.secretAccessKey}")
 	private String secretAccessKey;
 
