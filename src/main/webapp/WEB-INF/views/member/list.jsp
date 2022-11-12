@@ -15,7 +15,11 @@
 <body>
 	<my:navBar active="memberList"></my:navBar>
 
-	
+			${memberList[0] }<br>	
+			${memberList[1] }<br>
+			${memberList[2] }<br>
+			${memberList[3] }<br>
+			${memberList[4] }<br>
 	
 	<div class="container-md">
 	
@@ -29,22 +33,28 @@
 					</div>
 				</c:if>
 				
-			 list.jsp
+			 
 				<table class="table">
 					<thead>
-						<tr>
-							<th>#</th>
-							<th>title</th>
-							<th>writer</th>
-							<th>inserted</th>
+						<tr>				
+							<th>id</th>
+							<th>password</th>
+							<th>email</th>
 						</tr>
 					</thead>
 					<tbody>
 			
-				
+		
 						
-						<c:forEach items="${boardList}" var="board">
-										
+						<c:forEach items="${memberList}" var="member">	
+							<tr>	
+							<td>${member.id }</td>
+							<td>${member.password }</td>
+							<td>${member.email }</td>	
+							<tr>
+						</c:forEach> 
+				</tbody>
+				</table>
 						
 <!-- 	?? c:url을 쓰는 이유가 ?context path도 붙여주고 query string도 만들어주고 인코딩도 안해도 되서라는데.. 잘 모르겠음. -->
 <!-- 동일 소스로 context path를 자동 포함시키기 위함 입니다. -->
@@ -55,37 +65,7 @@
 <%-- 이때 <c:url>로 감싸게 되면 동적으로 context path 정보를 가져와 앞에 붙혀주게 됩니다.. --%>
 <!-- 안쓰게 되면 개발서버에 올릴때마다 소스를 수정해야겠죠.. -->
 						
-						
-						
-							<tr>
-								<td>${board.id }</td>
-								<td><a href="<c:url value= "/board/get?id=${board.id }"/>">${board.title }</a>
-								<%-- 댓글 수 출력 --%>
-									<c:if test="${board.countReply > 0 }">
-										<span class="badge rounded-pill text-bg-light">
-											<i class="fa-regular fa-comment-dots"></i>
-											${board.countReply }
-										</span>
-									</c:if>
-									
-									<%-- 파일 수 출력 --%>
-									<c:if test="${board.countFile > 0 }">
-										<span class="badge rounded-pill text-bg-light">
-											<i class="fa-regular fa-file"></i>
-											${board.countFile }
-										</span>
-									</c:if>
-									</td>
-								<td><a href="/board/get?id=${board.id }">${board.writer }</a></td>
-								<td>
-								<c:url value="/board/get" var="getLink">      
-								<c:param name="id" value="${board.id }"></c:param>
-								</c:url>
-								<a href="${getLink }">${board.inserted }</a></td>
-							</tr>
-						</c:forEach> 
-					</tbody>
-				</table>
+				
 <!-- 			</div> -->
 <!-- 		 </div> -->
 		

@@ -120,45 +120,48 @@ public class BoardController {
 	
 	
 	
-//list에서 넘어온 id로 보드객체 쿼리에서 셀렉해서 보여주기
-	@GetMapping("get") 
-	public void get(
-			// @RequestParam 생략 가능 -> 기본타입(String포함?)이면 리퀘스트파람으로 간주된대
-			int id,
-			Model model,
-			BoardDto boardDto,
-			PageInfo2 p,
-			Ay a,
-			HttpSession session
-			) {
+	 //list에서 넘어온 id로 보드객체 쿼리에서 셀렉해서 보여주기
+		@GetMapping("get") 
+		public void get(
+				// @RequestParam 생략 가능 -> 기본타입(String포함?)이면 리퀘스트파람으로 간주된대
+				int id,
+				Model model,
+				BoardDto boardDto
+				) {
+			
+			// req param
+			
+			// business logic (게시물 db에서 가져오기)
+			boardDto = service.get(id);
+		//	boardDto.setTitle("titletitle.."); //service.get(id)로 얻어온 보드의 타이틀 변경
+			System.out.println(boardDto);
+			System.out.println(boardDto.getId()); //콘솔 출력됨 
+			System.out.println(boardDto.getTitle()); // 콘솔 출력됨// ? ? 그런데 왜 id를 제외한 나머지는 어트리뷰트로 안넘어가지 ?
+			
+			
+			BoardDto board = service.get(id);
+			// add attribute 
+			model.addAttribute("board", board);
+			 
+			// forward
+			
+			
+			//매개변수로 모델과 보드디티오
+			//boardDto참조변수에 에 보드인스턴스 '리퀘파람으로 얻어온 아이디'를 가지고 db에서 얻어온 게시물 넣고 셋타이틀로 타이틀 변경
+			//board참조변수에 '리퀘파람으로 얻어온 아이디'를 가지고 db에서 얻어온 게시물 넣음 -> board참조변수는 board모델어트리뷰트에 넣음
+			//  ->인스턴스가 2개 생성된 ? 
+			
+			//db에서 보드 안가져오면 리퀘파람id와 셋타이틀 출려됨
+			//db에서 보드 가져오면 리퀘파람id만 출력됨
+			//
+			
+			//리퀘파람매개변수 이름과 객체(빈)매개변수 프로퍼티명이 같으면 자동으로 주입되는듯 
 		
-		// req param
-		
-		// business logic (게시물 db에서 가져오기)
-		BoardDto board = service.get(id); 
-		boardDto.setId(114);
-		boardDto.setTitle("titletitle..");
-		System.out.println(boardDto);
-		System.out.println(boardDto.getId()); //콘솔 출력됨 
-		System.out.println(boardDto.getTitle()); // 콘솔 출력됨// ? ? 그런데 왜 id를 제외한 나머지는 어트리뷰트로 안넘어가지 ?
-		p.setLastPageNumber(1111111); //이건 어트리뷰트로 넘어감.
-		System.out.println(p.getLastPageNumber());
-		
-		a.setS("ss");
-		a.setI(121212);
-		
-		
-		session.setAttribute("u", "dd");
-		
-		
-		
-	//	BoardDto board = service.get(id);
-		// add attribute 
-		model.addAttribute("board", board);
-		 
-		// forward
-		
-	}
+			
+			
+			//테이블 이름을 Board가 아니라 Boards라고 지었어야 할듯
+			
+		}
 	
 	
 	
@@ -172,6 +175,7 @@ public class BoardController {
 	public void modify(int id, Model model) {
 		BoardDto board = service.get(id);
 		model.addAttribute("board", board);
+		
 	}
 	
 	

@@ -17,17 +17,18 @@
 <body>
 	<my:navBar></my:navBar>
 	
-	aaa
-				id ${boardDto.id }.. <br />
-				<input class="form-control" type="text" value="${boardDto.title }" readonly="">
-					${boardDto.title }.. <br />
-					${boardDto.writer }.. <br />
-					${boardDto.inserted }.. <br />
-					${pageInfo2.lastPageNumber }.. <br />
-					${ay.s }.. <br />
-					${ay.i }.. <br />
-					----
-					${u }.. <br />
+
+					.${boardDto.id } <br />
+					.${boardDto.title } <br />
+					.${boardDto.writer } <br />
+					.${boardDto.inserted } <br />
+			
+					.${board.id } <br />
+					.${board.title } <br />
+					.${board.writer } <br />
+					.${board.inserted } <br />
+		
+					.${u } <br />
 					
 					
 	

@@ -5,8 +5,13 @@
   
 <mapper namespace="org.zerock.mapper.member.MemberMapper">
 
+<insert id="insert">
+	insert into Member (id,password, email) values(#{id},#{password},#{email})
+</insert>
 
-
+<select id="select" resultType="org.zerock.domain.member.MemberDto">
+	select id,password, email from Member
+</select>
 
 
 </mapper>
