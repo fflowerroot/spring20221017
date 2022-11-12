@@ -15,7 +15,7 @@
 <body>
 	<my:navBar active="list"></my:navBar>
 
-	
+		${message }
 	
 	<div class="container-md">
 	
@@ -29,7 +29,7 @@
 					</div>
 				</c:if>
 				
-			 list.jsp
+		
 				<table class="table">
 					<thead>
 						<tr>

@@ -1,0 +1,175 @@
+---다운로드---
+* 스프링프레임워크 > 1017 00:20
+  	>이클립스 안에 스프링프레임워크 설치
+    ?이클립스버전이랑 스프링버전이랑 맞춰야함?
+* 롬복 >강의 1017 00:50
+
+- 부트스트랩
+- jstl (.jar)/메이븐에서 
+
+-마리아디비
+
+
+
+spring프로젝트에는 jstl라이브러리(?)가 메이븐에 jar파일로 들어 있음
+
+서블릿이 컨트롤러?
+
+디스패처
+
+mvc
+모델 - 객체?
+뷰 -jsp
+컨트롤러 -서블릿?
+
+
+*-el은 데이터를 꺼내서 출력하는 역할만 함.
+  >반복문 없음
+ -el은 자바의 지역변수 등을 쓰는 것이 아니라 저장소에 담겨진 것 만 씀.
+  >컨트롤러에서 저장소에 담아놓은..
+     
+ 
+* request.getRequestDispatcher("/WEB-INf/view/notice/list.jsp").forward(request,response);    
+     
+ 
+ 
+* SGML  : Standard Geveralized Markup Language     
+* XML   : eXtensible Markup Language  
+* HTML  : Hyper Text Markup Language
+
+* RDBMS : Relational DB Management System
+
+* Entity : 독립체   
+
+* NoSQL
+
+
+* Http Method
+		//  CRUD      HTTP Method
+
+		// CREATE  : 	POST
+		// READ	   :    GET
+		// UPDATE  :	PUT
+		// DELETE  :	DELETE
+
+
+* REST : Representational State Transfer
+	1. 자원(Resource)
+	2. 행위(Verb)
+	3. 표현(Representation)
+
+
+
+
+* 웹 컴포넌트
+     
+     
+* 영속성 : 영구적 저장
+* context : 모든 정보
+* 영속성컨텍스트 : 데이터베이스에 저장할 때 자바가 알고 있는 모든 것이 저장되는(?) 것.    
+
+* db는 기본형만 가질 수 있고 오브젝트는 못 가진대
+
+     
+// 히카리시피 -  커넥션 풀
+// 메이븐 / 그레이들
+// 마이바티스 /jpa
+	    
+ 
+ 
+     
+ 
+*json
+ 간결한 형태로 구조화된 정보를 표시
+ 자바스크립트의 객체형태로(?) 정보를 표현
+ 객체에는 단일데이터, 또다른 객체, 배열이 들어갈 수 있음
+ 
+ *xml vs java config ?
+ *xml vs json ?
+ 
+ //list에서 넘어온 id로 보드객체 쿼리에서 셀렉해서 보여주기
+	@GetMapping("get") 
+	public void get(
+			// @RequestParam 생략 가능 -> 기본타입(String포함?)이면 리퀘스트파람으로 간주된대
+			int id,
+			Model model,
+			BoardDto boardDto
+			) {
+		
+		// req param
+		
+		// business logic (게시물 db에서 가져오기)
+		boardDto = service.get(id);
+		boardDto.setTitle("titletitle..");
+		System.out.println(boardDto);
+		System.out.println(boardDto.getId()); //콘솔 출력됨 
+		System.out.println(boardDto.getTitle()); // 콘솔 출력됨// ? ? 그런데 왜 id를 제외한 나머지는 어트리뷰트로 안넘어가지 ?
+		System.out.println(p.getLastPageNumber());
+		
+		BoardDto board = service.get(id);
+		// add attribute 
+		model.addAttribute("board", board);
+		 
+		// forward
+		
+		
+		//매개변수로 모델과 보드디티오
+		//boardDto참조변수에 에 보드인스턴스 '리퀘파람으로 얻어온 아이디'를 가지고 db에서 얻어온 게시물 넣고 셋타이틀로 타이틀 변경
+		//board참조변수에 '리퀘파람으로 얻어온 아이디'를 가지고 db에서 얻어온 게시물 넣음 -> board참조변수는 board모델어트리뷰트에 넣음
+		//  ->인스턴스가 2개 생성된 ? 
+
+	//테이블 이름을 Board가 아니라 Boards라고 지었어야 할듯
+		
+	}
+    
+--------------
+     
+     11월 12, 2022 1:53:23 오후 org.apache.catalina.loader.WebappClassLoaderBase clearReferencesJdbc
+경고: 웹 애플리케이션 [ROOT]이(가) JDBC 드라이버 [org.mariadb.jdbc.Driver]을(를) 등록했지만, 웹 애플리케이션이 중지될 때, 해당 JDBC 드라이버의 등록을 제거하지 못했습니다. 메모리 누수를 방지하기 위하여, 등록을 강제로 제거했습니다.
+11월 12, 2022 1:53:23 오후 org.apache.catalina.loader.WebappClassLoaderBase clearReferencesObjectStreamClassCaches
+경고: 웹 애플리케이션 [ROOT]을(를) 위해, ObjectStreamClass$Caches로부터 soft references를 폐기하지 못했습니다.
+java.lang.ClassCastException: class java.io.ObjectStreamClass$Caches$1 cannot be cast to class java.util.Map (java.io.ObjectStreamClass$Caches$1 and java.util.Map are in module java.base of loader 'bootstrap')
+	at org.apache.catalina.loader.WebappClassLoaderBase.clearCache(WebappClassLoaderBase.java:2336)
+	at org.apache.catalina.loader.WebappClassLoaderBase.clearReferencesObjectStreamClassCaches(WebappClassLoaderBase.java:2311)
+	at org.apache.catalina.loader.WebappClassLoaderBase.clearReferences(WebappClassLoaderBase.java:1674)
+	at org.apache.catalina.loader.WebappClassLoaderBase.stop(WebappClassLoaderBase.java:1602)
+	at org.apache.catalina.loader.WebappLoader.stopInternal(WebappLoader.java:463)
+	at org.apache.catalina.util.LifecycleBase.stop(LifecycleBase.java:257)
+	at org.apache.catalina.core.StandardContext.stopInternal(StandardContext.java:5515)
+	at org.apache.catalina.util.LifecycleBase.stop(LifecycleBase.java:257)
+	at org.apache.catalina.core.StandardContext.reload(StandardContext.java:3811)
+	at org.apache.catalina.loader.WebappLoader.backgroundProcess(WebappLoader.java:311)
+	at org.apache.catalina.core.StandardContext.backgroundProcess(StandardContext.java:5613)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1365)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1369)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.processChildren(ContainerBase.java:1369)
+	at org.apache.catalina.core.ContainerBase$ContainerBackgroundProcessor.run(ContainerBase.java:1347)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:539)
+	at java.base/java.util.concurrent.FutureTask.runAndReset(FutureTask.java:305)
+	at java.base/java.util.concurrent.ScheduledThreadPoolExecutor$ScheduledFutureTask.run(ScheduledThreadPoolExecutor.java:305)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1136)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:635)
+	at org.apache.tomcat.util.threads.TaskThread$WrappingRunnable.run(TaskThread.java:61)
+	at java.base/java.lang.Thread.run(Thread.java:833)
+
+11월 12, 2022 1:53:25 오후 org.apache.jasper.servlet.TldScanner scanJars
+정보: 적어도 하나의 JAR가 TLD들을 찾기 위해 스캔되었으나 아무 것도 찾지 못했습니다. 스캔했으나 TLD가 없는 JAR들의 전체 목록을 보시려면, 로그 레벨을 디버그 레벨로 설정하십시오. 스캔 과정에서 불필요한 JAR들을 건너뛰면, 시스템 시작 시간과 JSP 컴파일 시간을 단축시킬 수 있습니다.
+11월 12, 2022 1:53:25 오후 org.apache.catalina.core.ApplicationContext log
+정보: No Spring WebApplicationInitializer types detected on classpath
+11월 12, 2022 1:53:25 오후 org.apache.catalina.core.ApplicationContext log
+정보: Initializing Spring root WebApplicationContext
+
+
+--------------------------------
+
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     
+     

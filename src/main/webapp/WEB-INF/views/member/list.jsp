@@ -15,42 +15,35 @@
 <body>
 	<my:navBar active="memberList"></my:navBar>
 
-			${memberList[0] }<br>	
-			${memberList[1] }<br>
-			${memberList[2] }<br>
-			${memberList[3] }<br>
-			${memberList[4] }<br>
+	${memberList[0] }<br>	
+	-${m }<br>
 	
 	<div class="container-md">
 	
 <!-- 		<div class="row"> -->
 <!-- 			<div class="col"> -->
 			
-
-				<c:if test="${not empty message }">
 					<div class="alert alert-success">
 						${message }
 					</div>
-				</c:if>
-				
-			 
+			
+
 				<table class="table">
 					<thead>
 						<tr>				
 							<th>id</th>
 							<th>password</th>
 							<th>email</th>
+							<th>inserted</th>
 						</tr>
 					</thead>
 					<tbody>
-			
-		
-						
 						<c:forEach items="${memberList}" var="member">	
 							<tr>	
-							<td>${member.id }</td>
+							<td><a href="<c:url value="/member/get"/>">${member.id }</a></td>
 							<td>${member.password }</td>
 							<td>${member.email }</td>	
+							<td>${member.inserted }</td>	
 							<tr>
 						</c:forEach> 
 				</tbody>

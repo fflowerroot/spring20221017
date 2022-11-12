@@ -10,7 +10,7 @@
 </insert>
 
 <select id="select" resultType="org.zerock.domain.member.MemberDto">
-	select id,password, email from Member
+	select id,password, email, inserted from Member order by inserted desc
 </select>
 
 
