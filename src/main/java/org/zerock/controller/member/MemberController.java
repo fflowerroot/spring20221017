@@ -91,3 +91,6 @@ public class MemberController {
 		return "redirect:/";
 	}
 }
+
+//아이디중복확인
+
