@@ -258,4 +258,18 @@ public class BoardController {
 
 
 
+// 이미지등록.. 
+// get과 modify에
+// 하드디스크 또는 aws저장소 주소 , db , 이미지 테이블이 따로 있나 ?
+// 
+// 
+// 
+// 
+// 
+
+
+
+
+
+
 
